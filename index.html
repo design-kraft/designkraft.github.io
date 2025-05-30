@@ -1,107 +1,252 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>معرض أعمالي التصميمية</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9f9f9;
-      margin: 0; padding: 0;
-      color: #333;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>معرض أعمال التصميم</title>
+<style>
+  /* إعادة ضبط */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9f9f9;
+    color: #222;
+    direction: rtl;
+  }
+
+  /* الشريط الإخباري */
+  .news-ticker {
+    background: #003366;
+    color: white;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: content-box;
+    padding: 10px 0;
+    font-weight: bold;
+  }
+  .news-ticker span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker 15s linear infinite;
+  }
+  @keyframes ticker {
+    0%   { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* القائمة العلوية */
+  nav.top-nav {
+    background: #007acc;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+  nav.top-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  nav.top-nav a:hover {
+    color: #ffd700;
+  }
+
+  /* القائمة الرئيسية */
+  nav.main-nav {
+    background: white;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    gap: 40px;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+  }
+  nav.main-nav a {
+    color: #007acc;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  nav.main-nav a:hover {
+    color: #003366;
+  }
+
+  /* الحاوية الرئيسية */
+  .container {
+    display: flex;
+    max-width: 1200px;
+    margin: 30px auto;
+    gap: 20px;
+  }
+
+  /* عمود آخر المنشورات */
+  aside.latest-posts {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ccc;
+    height: fit-content;
+  }
+  aside.latest-posts h2 {
+    margin-bottom: 15px;
+    color: #007acc;
+  }
+  aside.latest-posts ul {
+    list-style: none;
+  }
+  aside.latest-posts ul li {
+    margin-bottom: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  aside.latest-posts ul li:hover {
+    color: #005999;
+  }
+
+  /* معرض الصور المتحرك */
+  section.carousel {
+    flex: 3;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px #aaa;
+    background: white;
+  }
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 300%;
+  }
+  .slide {
+    width: 100%;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .slide img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+  .slide figcaption {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  /* أزرار التنقل */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    border: none;
+    color: white;
+    font-size: 28px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .carousel-btn:hover {
+    background: rgba(0,0,0,0.7);
+  }
+  .carousel-btn.prev {
+    right: 10px;
+  }
+  .carousel-btn.next {
+    left: 10px;
+  }
+
+  /* تفاعل مع العرض */
+  @media (max-width: 900px) {
+    .container {
+      flex-direction: column;
     }
-    header {
-      background-color: #007acc;
-      color: white;
-      padding: 20px;
-      text-align: center;
+    section.carousel {
+      height: 300px;
     }
-    h1 {
-      margin: 0;
-      font-weight: normal;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .card {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    .card img {
-      width: 100%;
-      display: block;
-      height: 180px;
-      object-fit: cover;
-    }
-    .card .desc {
-      padding: 15px;
-      font-size: 16px;
-      text-align: center;
-    }
-    footer {
-      background-color: #007acc;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      font-size: 14px;
-      margin-top: 40px;
-    }
-    @media (max-width: 600px) {
-      .gallery {
-        grid-template-columns: 1fr;
-        padding: 10px;
-      }
-      .card img {
-        height: 150px;
-      }
-    }
-  </style>
+  }
+
+</style>
 </head>
 <body>
 
-<header>
-  <h1>معرض أعمالي التصميمية</h1>
-  <p>مرحبًا بك في معرض أعمالي! شاهد بعض من أفضل تصميماتي.</p>
-</header>
+<!-- الشريط الإخباري -->
+<div class="news-ticker" aria-label="شريط إخباري">
+  <span>أحدث أعمالي التصميمية قادمة! تابعني لتكون أول من يرى جديدي... - معرض أعمال تصميمي - مرحباً بك في معرض أعمالي الإبداعية!</span>
+</div>
 
-<section class="gallery">
+<!-- القائمة العلوية: وسائل التواصل الاجتماعي -->
+<nav class="top-nav" aria-label="وسائل التواصل الاجتماعي">
+  <a href="#" title="فيسبوك" target="_blank" rel="noopener">فيسبوك</a>
+  <a href="#" title="إنستجرام" target="_blank" rel="noopener">إنستجرام</a>
+  <a href="#" title="لينكد إن" target="_blank" rel="noopener">لينكد إن</a>
+  <a href="#" title="تويتر" target="_blank" rel="noopener">تويتر</a>
+</nav>
 
-  <div class="card">
-    <img src="design1.jpg" alt="تصميم 1" />
-    <div class="desc">تصميم شعار لشركة تقنية</div>
-  </div>
+<!-- القائمة الرئيسية -->
+<nav class="main-nav" aria-label="القائمة الرئيسية">
+  <a href="#تصاميم">تصاميم</a>
+  <a href="#شعارات">شعارات</a>
+  <a href="#مقالات">مقالات</a>
+</nav>
 
-  <div class="card">
-    <img src="design2.png" alt="تصميم 2" />
-    <div class="desc">تصميم واجهة مستخدم لتطبيق موبايل</div>
-  </div>
+<!-- المحتوى الرئيسي -->
+<div class="container">
+  <!-- عمود آخر المنشورات -->
+  <aside class="latest-posts" aria-label="آخر المنشورات">
+    <h2>آخر المنشورات</h2>
+    <ul>
+      <li>تصميم شعار شركة تقنية</li>
+      <li>تصميم واجهة تطبيق موبايل</li>
+      <li>تصميم بوستر إعلان</li>
+    </ul>
+  </aside>
 
-  <div class="card">
-    <img src="design3.jpg" alt="تصميم 3" />
-    <div class="desc">تصميم بوستر إعلان</div>
-  </div>
+  <!-- معرض الصور المتحرك -->
+  <section class="carousel" aria-label="معرض الصور">
+    <div class="slides">
+      <figure class="slide">
+        <img src="design1.jpg" alt="تصميم شعار شركة تقنية" />
+        <figcaption>تصميم شعار شركة تقنية</figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="design2.jpg" alt="تصميم واجهة تطبيق موبايل" />
+        <figcaption>تصميم واجهة تطبيق موبايل</figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="design3.jpg" alt="تصميم بوستر إعلان" />
+        <figcaption>تصميم بوستر إعلان</figcaption>
+      </figure>
+    </div>
+    <button class="carousel-btn prev" aria-label="السابق">&#10095;</button>
+    <button class="carousel-btn next" aria-label="التالي">&#10094;</button>
+  </section>
+</div>
 
-  <!-- أضف المزيد من بطاقات التصميم هنا -->
-  
-</section>
+<script>
+  // جافاسكريبت لمعرض الصور المتحرك
+  const slides = document.querySelector('.slides');
+  const slideCount = document.querySelectorAll('.slide').length;
+  let currentIndex = 0;
 
-<footer>
-  حقوق النشر &copy; 2025 تصميمي الخاص
-</footer>
+  document.querySelector('.carousel-btn.next').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % slideCount;
+    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+  });
+
+  document.querySelector('.carousel-btn.prev').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+  });
+</script>
 
 </body>
 </html>
