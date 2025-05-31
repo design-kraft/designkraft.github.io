@@ -17,8 +17,6 @@
 
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
-    <link rel="stylesheet" href="assets/css/style.css">
-
     <style>
         /* أنماط أساسية لتظهر الصفحة بشكل مقبول قبل إنشاء ملف style.css */
         :root {
@@ -64,11 +62,22 @@
         .announcement-bar span {
             display: inline-block;
             white-space: nowrap;
-            animation: marquee-rtl 15s linear infinite; /* حركة نص متحرك من اليمين لليسار */
+            /* Animation for right-to-left scrolling (text appears from right, moves left) */
+            /* animation: marquee-rtl 15s linear infinite; */
+
+            /* Animation for left-to-right scrolling (text appears from left, moves right) as requested */
+            animation: marquee-ltr 15s linear infinite;
         }
-        @keyframes marquee-rtl {
-            0% { transform: translateX(100%); } /* يبدأ من أقصى اليسار ويتحرك لليمين */
-            100% { transform: translateX(-100%); } /* ينتهي في أقصى اليمين */
+        /* Animation for text to appear from RIGHT and scroll towards LEFT */
+        /* @keyframes marquee-rtl {
+            0% { transform: translateX(100%); } 
+            100% { transform: translateX(-100%); } 
+        } */
+
+        /* Animation for text to appear from LEFT and scroll towards RIGHT */
+        @keyframes marquee-ltr {
+            0% { transform: translateX(-100%); } /* Start from left outside */
+            100% { transform: translateX(100%); }  /* End at right outside */
         }
 
 
@@ -83,7 +92,7 @@
 
         nav {
             display: flex;
-            justify-content: space-between; /* الشعار على اليسار، القائمة على اليمين */
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -93,22 +102,20 @@
             color: var(--primary-color);
             font-weight: bold;
             text-decoration: none;
-            /* order: 1; لإعادة ترتيب العناصر في flexbox، سنستخدمها في media queries */
         }
 
-        /* قائمة التنقل الرئيسية للديسك توب */
+        /* قائمة التنقل الرئيسية للديسك توب - مخفية افتراضياً */
         nav ul.main-nav {
             list-style: none;
             margin: 0;
             padding: 0;
-            display: flex; /* لضمان عرضها أفقياً على الديسك توب */
+            display: none; /* Hidden by default for mobile-first approach */
             align-items: center;
-            /* order: 2; */
         }
 
         nav ul.main-nav li {
             position: relative;
-            margin-left: 30px; /* مسافة بين العناصر */
+            margin-left: 30px;
         }
 
         nav ul.main-nav li:last-child {
@@ -138,7 +145,7 @@
             z-index: 1;
             border-radius: 5px;
             top: 100%;
-            left: 0; /* تظهر القائمة المنسدلة على اليسار */
+            left: 0;
             padding: 10px 0;
             text-align: right;
         }
@@ -167,8 +174,11 @@
         /* زر اللغات المنسدل */
         .lang-dropdown {
             position: relative;
-            margin-left: 20px; /* مسافة عن عناصر القائمة */
             cursor: pointer;
+        }
+        /* Hide desktop language dropdown by default */
+        .lang-dropdown.desktop-lang-dropdown {
+            display: none;
         }
 
         .lang-dropdown-btn {
@@ -182,13 +192,14 @@
             justify-content: space-between;
             gap: 8px;
             transition: background-color 0.3s ease;
+            white-space: nowrap; /* Prevent text wrapping */
         }
         .lang-dropdown-btn:hover {
             background-color: var(--secondary-color);
         }
         .lang-dropdown-btn i {
             font-size: 0.8em;
-            margin-right: 5px; /* مسافة بين النص والأيقونة */
+            margin-right: 5px; /* Adjust margin for RTL */
         }
 
         .lang-dropdown-content {
@@ -200,7 +211,7 @@
             z-index: 1;
             border-radius: 5px;
             top: 100%;
-            left: 0; /* تظهر القائمة على اليسار */
+            left: 0;
             padding: 10px 0;
             text-align: right;
         }
@@ -222,15 +233,67 @@
             display: block;
         }
 
-        /* زر الهامبرغر - مخفي على الديسك توب */
+        /* زر الهامبرغر - مرئي افتراضياً (Mobile First) */
         .menu-toggle {
-            display: none;
+            display: block; /* Visible by default (mobile-first) */
             font-size: 2em;
             color: var(--text-color);
             cursor: pointer;
-            z-index: 1001; /* فوق كل شيء */
+            z-index: 1001;
+            margin-right: 15px; /* Add some space from the edge */
         }
 
+        /* Mobile Menu Styles (قائمة الهامبرغر الجانبية) */
+        .mobile-menu {
+            display: block; /* Always display block, control visibility with right/left */
+            position: fixed;
+            top: 0;
+            right: -250px; /* Hidden off-screen to the left */
+            width: 250px;
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            z-index: 1100;
+            transition: right 0.3s ease-in-out;
+            padding-top: 60px;
+            text-align: right;
+            overflow-y: auto;
+        }
+        .mobile-menu.active {
+            right: 0; /* Shows up */
+        }
+        .mobile-menu ul {
+            list-style: none;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            align-items: flex-end;
+        }
+        .mobile-menu ul li {
+            margin: 0;
+            width: 100%;
+            border-bottom: 1px solid #eee;
+        }
+        .mobile-menu ul li a {
+            padding: 15px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            color: var(--text-color);
+        }
+        .mobile-menu ul li a:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* زر إغلاق القائمة الجانبية */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+        
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1500x800.png?text=Creative+Design+Background') no-repeat center center/cover;
@@ -484,83 +547,32 @@
             transform: translateY(-3px);
         }
 
-        /* Mobile Menu Styles (قائمة الهامبرغر) */
-        .mobile-menu {
-            display: none; /* مخفية افتراضياً في جميع الأحجام */
-            position: fixed;
-            top: 0;
-            right: -250px; /* مخفية في البداية خارج الشاشة */
-            width: 250px;
-            height: 100%;
-            background-color: var(--white);
-            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-            z-index: 1100;
-            transition: right 0.3s ease-in-out;
-            padding-top: 60px;
-            text-align: right;
-            overflow-y: auto; /* للسماح بالتمرير إذا كانت القائمة طويلة */
-        }
-        .mobile-menu.active {
-            right: 0; /* تظهر عند التفعيل */
-        }
-        .mobile-menu ul {
-            list-style: none;
-            flex-direction: column;
-            padding: 0;
-            margin: 0;
-            align-items: flex-end; /* محاذاة لليمين */
-        }
-        .mobile-menu ul li {
-            margin: 0;
-            width: 100%;
-            border-bottom: 1px solid #eee;
-        }
-        .mobile-menu ul li a {
-            padding: 15px 20px;
-            width: 100%;
-            box-sizing: border-box;
-            color: var(--text-color);
-        }
-        .mobile-menu ul li a:hover {
-            background-color: #f5f5f5;
-        }
-
-        /* زر إغلاق القائمة الجانبية */
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 2em;
-            color: var(--text-color);
-            cursor: pointer;
-        }
-
-        /* Media Queries للتوافقية */
-        @media (max-width: 992px) { /* الشاشات اللوحية الكبيرة والمتوسطة */
+        /* Media Queries للتوافقية (Desktop-First Approach) */
+        @media (min-width: 993px) { /* للديسك توب والشاشات الأكبر من 992px */
             nav ul.main-nav {
-                display: none; /* إخفاء القائمة الرئيسية للديسك توب */
+                display: flex; /* إظهار القائمة الرئيسية للديسك توب */
             }
             .menu-toggle {
-                display: block; /* إظهار زر الهامبرغر */
-                order: 2; /* وضع زر الهامبرغر على اليمين */
+                display: none; /* إخفاء زر الهامبرغر */
             }
-            .logo {
-                order: 1; /* الشعار على اليسار */
-            }
-            nav {
-                justify-content: space-between;
-            }
-            /* جعل زر اللغات يظهر على اليمين بجانب الهامبرغر إذا كانت القائمة الرئيسية مخفية */
             .lang-dropdown.desktop-lang-dropdown {
-                display: none; /* إخفاء زر اللغة الخاص بالديسك توب */
+                display: block; /* إظهار زر اللغة للديسك توب */
+                margin-left: 20px; /* مسافة عن باقي القائمة */
             }
-            .mobile-menu .lang-dropdown.mobile-lang-dropdown {
+            .mobile-menu {
+                display: none; /* إخفاء القائمة الجانبية تماماً */
+            }
+        }
+
+        @media (max-width: 992px) { /* للشاشات اللوحية الكبيرة والجوالات */
+            /* عناصر الـ nav ستكون مرتبة تلقائياً بناءً على flexbox إذا لم يتم تحديد order */
+            /* الشعار على اليسار، زر الهامبرغر على اليمين */
+            .lang-dropdown.mobile-lang-dropdown {
                 display: block; /* إظهار زر اللغة داخل قائمة الجوال */
             }
             .mobile-menu .lang-dropdown-btn {
                 width: calc(100% - 40px); /* ليتناسب مع البادينغ */
-                margin: 0 auto;
-                margin-top: 15px;
+                margin: 15px auto; /* مسافة علوية وسفلية وتوسيط */
             }
             .mobile-menu .lang-dropdown-content {
                 position: static; /* لكي لا تخرج من القائمة الجانبية */
@@ -592,7 +604,7 @@
                 max-width: 400px;
             }
             .announcement-bar span {
-                animation: marquee-rtl 10s linear infinite; /* أسرع قليلاً للجوال */
+                animation: marquee-ltr 10s linear infinite; /* أسرع قليلاً للجوال */
             }
             /* Swiper adjustments for smaller screens */
             .swiper-button-next, .swiper-button-prev {
@@ -679,7 +691,7 @@
             <li><a href="#portfolio">أعمالنا</a></li>
             <li><a href="#about">عنّا</a></li>
             <li><a href="#contact">اتصل بنا</a></li>
-            <li class="lang-dropdown mobile-lang-dropdown" style="display: none;">
+            <li class="lang-dropdown mobile-lang-dropdown">
                 <a href="#" class="lang-dropdown-btn">
                     <span id="current-lang-text-mobile">العربية</span> <i class="fas fa-chevron-down"></i>
                 </a>
@@ -889,7 +901,7 @@
             
             dropdownToggles.forEach(toggle => {
                 toggle.addEventListener('click', function(e) {
-                    if (this.getAttribute('href').startsWith('#services')) { // يشمل #services و #services-mobile
+                    if (this.getAttribute('href').startsWith('#services')) { 
                         e.preventDefault();
                     }
                     const parentLi = this.parentElement;
@@ -937,7 +949,12 @@
             
             // إخفاء جميع القوائم المنسدلة عند النقر خارجها
             document.addEventListener('click', function(e) {
-                if (!e.target.closest('.has-dropdown') && !e.target.closest('.lang-dropdown') && !e.target.closest('.mobile-menu-toggle')) {
+                // Check if the click was not inside any dropdown or the mobile menu toggle
+                const isInsideDropdown = e.target.closest('.has-dropdown') || e.target.closest('.lang-dropdown');
+                const isMobileMenuToggle = e.target.closest('.menu-toggle');
+                const isInsideMobileMenu = e.target.closest('.mobile-menu');
+
+                if (!isInsideDropdown && !isMobileMenuToggle && !isInsideMobileMenu) {
                     document.querySelectorAll('.dropdown-menu').forEach(menu => {
                         menu.style.display = 'none';
                         menu.closest('.has-dropdown').classList.remove('active');
@@ -946,6 +963,12 @@
                         content.style.display = 'none';
                         content.closest('.lang-dropdown').classList.remove('active');
                     });
+                     // Close mobile menu if open and click outside
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu && mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
                 }
             });
 
