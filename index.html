@@ -3,198 +3,1001 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DesignKraaft - موقع عربي</title>
+    <title>DesignKraaft | تصميم إبداعي، مونتاج احترافي، محتوى مؤثر، ترجمة دقيقة</title>
+    <meta name="description" content="DesignKraaft: شريكك الموثوق لخدمات تصميم الجرافيك، المونتاج، الكتابة الإبداعية، التنسيق البصري، والترجمة الاحترافية. نحول أفكارك إلى تصاميم بصرية مبهرة ومحتوى مؤثر.">
+    <meta name="keywords" content="تصميم جرافيك، تصميم شعارات، تصميم هوية بصرية، تصميم واجهات مستخدم، UI/UX، تصميم مواقع، تصميم إبداعي، مونتاج فيديو، مقدمات يوتيوب، كتابة إبداعية، CV احترافي، تنسيق كتب، تدقيق لغوي، ترجمة تركي عربي، خدمات تصميم، اعلانات احترافية، تصميم 3D، اغلفة كتب، شهادات تعليمية، DesignKraaft">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Changa:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
     <style>
-        /* CSS Resets and Base Styles */
+        /* أنماط أساسية لتظهر الصفحة بشكل مقبول قبل إنشاء ملف style.css */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #0056b3;
+            --text-color: #333;
+            --light-bg: #f8f8f8;
+            --lighter-bg: #eef5ff;
+            --white: #fff;
+            --shadow-light: 0 5px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
         body {
+            font-family: 'Cairo', sans-serif;
             margin: 0;
-            font-family: 'Cairo', sans-serif; /* استخدام خط القاهرة (أكثر ملاءمة للعربية) */
-            direction: rtl; /* اتجاه الصفحة من اليمين لليسار */
-            text-align: right; /* محاذاة النص الافتراضية لليمين */
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--light-bg);
+            color: var(--text-color);
             line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
+            direction: rtl; /* اتجاه عام لليمين لليسار */
+            text-align: right; /* محاذاة النص الافتراضية */
         }
 
-        /* Header Styling */
-        header {
-            background-color: #fff;
-            padding: 15px 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-bottom: 1px solid #eee;
-        }
-
-        /* Container for Logo and Navigation */
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* شريط الإعلانات العلوي */
+        .announcement-bar {
+            background-color: #ff4d4d; /* لون مميز للعرض */
+            color: var(--white);
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1.1em;
+            font-weight: bold;
+            overflow: hidden;
+            position: relative;
+        }
+        .announcement-bar span {
+            display: inline-block;
+            white-space: nowrap;
+            /* Animation for left-to-right scrolling (text appears from left, moves right) as requested */
+            animation: marquee-ltr 15s linear infinite;
+        }
+        @keyframes marquee-ltr {
+            0% { transform: translateX(-100%); } /* Start from left outside */
+            100% { transform: translateX(100%); } /* End at right outside */
+        }
+
+        header {
+            background-color: var(--white);
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
             display: flex;
-            justify-content: space-between; /* يدفع الشعار والقائمة للأطراف */
-            align-items: center; /* محاذاة عمودية في المنتصف */
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Logo Styling */
-        .logo a {
+        .logo {
+            font-family: 'Changa', sans-serif;
+            font-size: 2em;
+            color: var(--primary-color);
+            font-weight: bold;
             text-decoration: none;
-            font-family: sans-serif; /* يمكن الاحتفاظ بخط مختلف للشعار إذا أردت */
-            font-size: 30px; /* حجم أكبر للشعار */
-            color: #007bff; /* اللون الأزرق المميز */
-            font-weight: 700; /* خط سميك */
-            white-space: nowrap; /* يمنع انقسام كلمة "DesignKraaft" */
-            order: -1; /* هذا يجعل الشعار يظهر في أقصى اليسار في سياق RTL Flexbox */
         }
 
-        /* Navigation Menu Styling */
-        .nav-menu ul {
-            list-style: none; /* إزالة النقاط من القائمة */
+        /* قائمة التنقل الرئيسية للديسك توب - مخفية افتراضياً */
+        nav ul.main-nav {
+            list-style: none;
             margin: 0;
             padding: 0;
-            display: flex; /* لجعل عناصر القائمة أفقية */
-            /* لا حاجة لـ flex-direction: row-reverse هنا لأن direction: rtl على الـ body يعتني بالترتيب */
+            display: none; /* Hidden by default for mobile-first approach */
+            align-items: center;
         }
 
-        .nav-menu li {
-            /* مسافة بين عناصر القائمة. margin-left في سياق RTL يترك مسافة على يسار العنصر */
-            margin-left: 30px; /* مسافة أكبر قليلاً بين الروابط */
-            position: relative; /* لتمكين وضع القوائم الفرعية إذا وجدت */
+        nav ul.main-nav li {
+            position: relative;
+            margin-left: 30px;
         }
 
-        /* إزالة المسافة من آخر عنصر في القائمة (وهو "اتصل بنا" في ترتيب HTML) */
-        .nav-menu li:last-child {
+        nav ul.main-nav li:last-child {
             margin-left: 0;
         }
 
-        .nav-menu a {
-            text-decoration: none; /* إزالة الخط تحت الروابط */
-            color: #555; /* لون نص الروابط */
-            font-size: 18px; /* حجم أكبر قليلاً لنص الروابط */
-            padding: 10px 0; /* مسافة داخلية لجعل منطقة الضغط أكبر */
-            display: block; /* لجعل الروابط تملأ المساحة المخصصة للـ padding */
-            white-space: nowrap; /* يمنع انقسام كلمات التنقل */
-            transition: color 0.3s ease; /* تأثير انتقال ناعم للون */
+        nav ul.main-nav li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+            display: block;
         }
 
-        .nav-menu a:hover {
-            color: #007bff; /* تغيير اللون عند مرور الماوس */
+        nav ul.main-nav li a:hover {
+            color: var(--primary-color);
         }
 
-        /* Hero Section Styling (مثال لمحتوى الصفحة) */
-        .hero-section {
+        /* زر قائمة الخدمات المنسدلة */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            min-width: 200px;
+            z-index: 1;
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
+            padding: 10px 0;
+            text-align: right;
+        }
+
+        .dropdown-menu li {
+            margin: 0;
+        }
+
+        .dropdown-menu li a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f1f1f1;
+            color: var(--primary-color);
+        }
+
+        nav ul.main-nav li.has-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* زر اللغات المنسدل */
+        .lang-dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+        /* Hide desktop language dropdown by default */
+        .lang-dropdown.desktop-lang-dropdown {
+            display: none;
+        }
+
+        .lang-dropdown-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            transition: background-color 0.3s ease;
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+        .lang-dropdown-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        .lang-dropdown-btn i {
+            font-size: 0.8em;
+            margin-right: 5px; /* Adjust margin for RTL */
+        }
+
+        .lang-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
+            padding: 10px 0;
+            text-align: right;
+        }
+
+        .lang-dropdown-content a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s ease;
+        }
+
+        .lang-dropdown-content a:hover {
+            background-color: #f1f1f1;
+            color: var(--primary-color);
+        }
+
+        .lang-dropdown.active .lang-dropdown-content {
+            display: block;
+        }
+
+        /* زر الهامبرغر - مرئي افتراضياً (Mobile First) */
+        .menu-toggle {
+            display: block; /* Visible by default (mobile-first) */
+            font-size: 2em;
+            color: var(--text-color);
+            cursor: pointer;
+            z-index: 1001;
+            margin-right: 15px; /* Add some space from the edge */
+        }
+
+        /* Mobile Menu Styles (قائمة الهامبرغر الجانبية) */
+        .mobile-menu {
+            display: block; /* Always display block, control visibility with right/left */
+            position: fixed;
+            top: 0;
+            right: -250px; /* Hidden off-screen to the left */
+            width: 250px;
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            z-index: 1100;
+            transition: right 0.3s ease-in-out;
+            padding-top: 60px;
+            text-align: right;
+            overflow-y: auto;
+        }
+        .mobile-menu.active {
+            right: 0; /* Shows up */
+        }
+        .mobile-menu ul {
+            list-style: none;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            align-items: flex-end;
+        }
+        .mobile-menu ul li {
+            margin: 0;
+            width: 100%;
+            border-bottom: 1px solid #eee;
+        }
+        .mobile-menu ul li a {
+            padding: 15px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            color: var(--text-color);
+        }
+        .mobile-menu ul li a:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* زر إغلاق القائمة الجانبية */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1500x800.png?text=Creative+Design+Background') no-repeat center center/cover;
+            color: var(--white);
             text-align: center;
-            padding: 80px 20px;
-            background-color: #eef7ff;
-            color: #2c3e50;
-            border-bottom: 1px solid #dbe9f6;
+            padding: 100px 20px;
+            background-position: center;
+            background-size: cover;
         }
 
-        .hero-section h1 {
+        .hero h1 {
             font-size: 3.5em;
             margin-bottom: 20px;
-            color: #007bff;
-            font-weight: 700;
+            direction: rtl;
         }
 
-        .hero-section p {
-            font-size: 1.2em;
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
             max-width: 800px;
-            margin: 0 auto 40px;
+            margin-left: auto;
+            margin-right: auto;
+            direction: rtl;
         }
 
-        .cta-button {
+        .btn {
             display: inline-block;
-            background-color: #007bff;
-            color: #fff;
+            background-color: var(--primary-color);
+            color: var(--white);
             padding: 15px 30px;
             text-decoration: none;
             border-radius: 5px;
-            font-size: 1.1em;
+            font-weight: bold;
             transition: background-color 0.3s ease;
         }
 
-        .cta-button:hover {
-            background-color: #0056b3;
+        .btn:hover {
+            background-color: var(--secondary-color);
         }
 
-        /* Main Content Styling (مثال) */
-        main {
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: right; /* محاذاة النص لليمين */
+        .section {
+            padding: 60px 0;
+            text-align: center;
         }
 
-        main h2 {
-            font-size: 2.2em;
-            color: #007bff;
+        .section h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-item {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: right;
+            direction: rtl;
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .service-item i {
+            font-size: 3em;
+            color: var(--primary-color);
             margin-bottom: 20px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+            display: block;
+            text-align: right;
         }
 
-        main p {
+        .service-item h3 {
+            font-size: 1.8em;
             margin-bottom: 15px;
-            font-size: 1.1em;
+            color: var(--text-color);
         }
 
-        /* Footer Styling (مثال) */
+        .service-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .service-item li {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            color: #666;
+            position: relative;
+            padding-right: 25px; /* مسافة للأيقونة */
+        }
+        .service-item li::before {
+            content: "\f00c"; /* أيقونة علامة صح */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #28a745; /* لون أخضر */
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 0.9em;
+        }
+
+        /* أنماط الكاروسيل (القالب المتقلب) */
+        .portfolio-carousel {
+            margin-top: 50px;
+        }
+
+        .swiper-slide {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            text-align: right;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .swiper-slide .info {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .swiper-slide .info h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .swiper-slide .info p {
+            color: #777;
+            font-size: 1em;
+        }
+
+        /* أزرار التنقل في Swiper */
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--primary-color) !important;
+            font-size: 2em !important;
+            --swiper-navigation-size: 40px;
+        }
+        .swiper-button-next::after, .swiper-button-prev::after {
+            font-size: 40px !important;
+        }
+        .swiper-pagination-bullet-active {
+            background-color: var(--primary-color) !important;
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 50px auto 0;
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            text-align: right;
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+            text-align: right; /* محاذاة النص المدخل لليمين */
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: var(--secondary-color);
+        }
+
         footer {
             background-color: #333;
-            color: #f0f0f0;
+            color: var(--white);
+            padding: 40px 0;
             text-align: center;
-            padding: 20px;
-            margin-top: 50px;
             font-size: 0.9em;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .social-icons a {
+            color: var(--white);
+            font-size: 1.8em;
+            margin: 0 12px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Media Queries للتوافقية (Desktop-First Approach) */
+        @media (min-width: 993px) { /* للديسك توب والشاشات الأكبر من 992px */
+            nav ul.main-nav {
+                display: flex; /* إظهار القائمة الرئيسية للديسك توب */
+            }
+            .menu-toggle {
+                display: none; /* إخفاء زر الهامبرغر */
+            }
+            .lang-dropdown.desktop-lang-dropdown {
+                display: block; /* إظهار زر اللغة للديسك توب */
+                margin-left: 20px; /* مسافة عن باقي القائمة */
+            }
+            .mobile-menu {
+                display: none; /* إخفاء القائمة الجانبية تماماً */
+            }
+        }
+
+        @media (max-width: 992px) { /* للشاشات اللوحية الكبيرة والجوالات */
+            /* عناصر الـ nav ستكون مرتبة تلقائياً بناءً على flexbox إذا لم يتم تحديد order */
+            /* الشعار على اليسار، زر الهامبرغر على اليمين */
+            .lang-dropdown.mobile-lang-dropdown {
+                display: block; /* إظهار زر اللغة داخل قائمة الجوال */
+            }
+            .mobile-menu .lang-dropdown-btn {
+                width: calc(100% - 40px); /* ليتناسب مع البادينغ */
+                margin: 15px auto; /* مسافة علوية وسفلية وتوسيط */
+            }
+            .mobile-menu .lang-dropdown-content {
+                position: static; /* لكي لا تخرج من القائمة الجانبية */
+                box-shadow: none;
+                border-top: 1px solid #eee;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .mobile-menu .lang-dropdown-content li a {
+                padding: 10px 0;
+            }
+        }
+
+        @media (max-width: 768px) { /* الشاشات اللوحية الصغيرة والجوالات */
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .section h2 {
+                font-size: 2em;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .service-item {
+                margin: 0 auto;
+                max-width: 400px;
+            }
+            .announcement-bar span {
+                animation: marquee-ltr 10s linear infinite; /* أسرع قليلاً للجوال */
+            }
+            /* Swiper adjustments for smaller screens */
+            .swiper-button-next, .swiper-button-prev {
+                display: none !important; /* إخفاء أزرار التنقل في الجوال */
+            }
+        }
+
+        @media (max-width: 480px) { /* الشاشات الجوال الأصغر */
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 0.9em;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
 
+    <div class="announcement-bar">
+        <span>🎁 خصم خاص 20% على جميع خدمات التصميم الجديدة! سارع بالحجز الآن واستفد من العرض! ✨</span>
+    </div>
+
     <header>
         <div class="container">
-            <div class="logo">
-                <a href="#">DesignKraaft</a>
-            </div>
+            <nav>
+                <a href="#" class="logo">DesignKraaft</a>
+                
+                <div class="menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
 
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="#">الرئيسية</a></li>
-                    <li><a href="#">خدماتنا</a></li>
-                    <li><a href="#">أعمالنا</a></li>
-                    <li><a href="#">عنا</a></li>
-                    <li><a href="#">اتصل بنا</a></li>
+                <ul class="main-nav">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li class="has-dropdown">
+                        <a href="#services">خدماتنا <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-right: 5px;"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#design-graphic">تصميم الجرافيك والإبداع البصري</a></li>
+                            <li><a href="#video-editing">المونتاج وإنتاج الفيديو الاحترافي</a></li>
+                            <li><a href="#creative-writing">الكتابة الإبداعية وصياغة المحتوى</a></li>
+                            <li><a href="#visual-coordination">التنسيق البصري والتدقيق اللغوي</a></li>
+                            <li><a href="#translation">الترجمة الاحترافية</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#portfolio">أعمالنا</a></li>
+                    <li><a href="#about">عنّا</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                    
+                    <li class="lang-dropdown desktop-lang-dropdown" id="desktop-lang-dropdown">
+                        <a href="#" class="lang-dropdown-btn">
+                            <span id="current-lang-text">العربية</span> <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="lang-dropdown-content">
+                            <li><a href="#" data-lang="ar">العربية</a></li>
+                            <li><a href="#" data-lang="tr">Türkçe</a></li>
+                            <li><a href="#" data-lang="en">English</a></li>
+                            <li><a href="#" data-lang="de">Deutsch</a></li>
+                            <li><a href="#" data-lang="fr">Français</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <div class="hero-section">
-        <h1>مرحبًا بكم في عالم الإبداع والتصميم</h1>
-        <p>نحن نقدم حلول تصميم مبتكرة وعصرية لمساعدتك على بناء هوية بصرية فريدة لمشروعك.</p>
-        <a href="#" class="cta-button">تواصل معنا الآن</a>
+    <div class="mobile-menu" id="mobile-menu">
+        <span class="close-btn" id="close-mobile-menu"><i class="fas fa-times"></i></span>
+        <ul>
+            <li><a href="#home">الرئيسية</a></li>
+            <li class="has-dropdown" id="mobile-services-dropdown-toggle">
+                <a href="#services-mobile">خدماتنا <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-right: 5px;"></i></a>
+                <ul class="dropdown-menu mobile-services-dropdown">
+                    <li><a href="#design-graphic">تصميم الجرافيك والإبداع البصري</a></li>
+                    <li><a href="#video-editing">المونتاج وإنتاج الفيديو الاحترافي</a></li>
+                    <li><a href="#creative-writing">الكتابة الإبداعية وصياغة المحتوى</a></li>
+                    <li><a href="#visual-coordination">التنسيق البصري والتدقيق اللغوي</a></li>
+                    <li><a href="#translation">الترجمة الاحترافية</a></li>
+                </ul>
+            </li>
+            <li><a href="#portfolio">أعمالنا</a></li>
+            <li><a href="#about">عنّا</a></li>
+            <li><a href="#contact">اتصل بنا</a></li>
+            <li class="lang-dropdown mobile-lang-dropdown" id="mobile-lang-dropdown">
+                <a href="#" class="lang-dropdown-btn">
+                    <span id="current-lang-text-mobile">العربية</span> <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="lang-dropdown-content mobile-lang-content">
+                    <li><a href="#" data-lang="ar">العربية</a></li>
+                    <li><a href="#" data-lang="tr">Türkçe</a></li>
+                    <li><a href="#" data-lang="en">English</a></li>
+                    <li><a href="#" data-lang="de">Deutsch</a></li>
+                    <li><a href="#" data-lang="fr">Français</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
 
     <main>
-        <h2>خدماتنا المتميزة</h2>
-        <p>في DesignKraaft، نؤمن بأن التصميم الجيد هو أساس النجاح. نقدم مجموعة واسعة من الخدمات لتلبية احتياجات عملك:</p>
-        <ul>
-            <li>تصميم الشعارات والهويات البصرية</li>
-            <li>تصميم المواقع وتجربة المستخدم (UI/UX)</li>
-            <li>تصميم المطبوعات والتسويق</li>
-            <li>تصميم واجهات تطبيقات الهاتف</li>
-        </ul>
-        <p>نسعى دائمًا لتقديم أفضل جودة، مع التركيز على التفاصيل التي تجعل تصميمك متميزًا.</p>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>نصمم رؤيتك... نصنع تأثيرك.</h1>
+                <p>نحن DesignKraaft، فريق من المصممين المبدعين نلتزم بتحويل أفكارك إلى تصاميم بصرية مبهرة ومحتوى مؤثر يترك أثراً لا ينسى.</p>
+                <a href="#contact" class="btn">اطلب تصميمك الآن!</a>
+            </div>
+        </section>
 
-        <h2>لماذا تختار DesignKraaft؟</h2>
-        <p>لدينا فريق من المصممين الموهوبين وذوي الخبرة الذين يركزون على تحقيق رؤيتك وتحويلها إلى واقع ملموس.</p>
-        <p>نحن نلتزم بالجودة العالية، الابتكار، والتسليم في المواعيد المحددة.</p>
+        <section id="services" class="section">
+            <div class="container">
+                <h2>خدماتنا الإبداعية المتكاملة ✨</h2>
+                <p>في DesignKraaft، نجمع بين الإبداع والخبرة لتقديم حلول متكاملة تلبي تطلعاتكم في مختلف المجالات.</p>
+                <div class="services-grid">
+                    <div class="service-item" id="design-graphic">
+                        <i class="fas fa-paint-brush"></i>
+                        <h3>تصميم الجرافيك والإبداع البصري</h3>
+                        <ul>
+                            <li>تصميم أغلفة الكتب والشهادات التعليمية.</li>
+                            <li>تصميم هوية شخصية للمنظمات والشركات لموظفيها.</li>
+                            <li>تصميم شعارات احترافية (مع إمكانية التحويل لـ 3D).</li>
+                            <li>تصميم إعلانات تسويقية جذابة (لمعاهد، منظمات، حملات إعلامية).</li>
+                            <li>تصميم أغلفة ومنشورات فيسبوك وإنستغرام.</li>
+                        </ul>
+                    </div>
+                    <div class="service-item" id="video-editing">
+                        <i class="fas fa-video"></i>
+                        <h3>المونتاج وإنتاج الفيديو الاحترافي</h3>
+                        <ul>
+                            <li>تحويل الشعارات إلى مقدمات فيديو متحركة لقنوات اليوتيوب والتيك توك.</li>
+                            <li>إنشاء فيديوهات عرض تقديمية احترافية للمشاريع والشركات.</li>
+                        </ul>
+                    </div>
+                    <div class="service-item" id="creative-writing">
+                        <i class="fas fa-pen-nib"></i>
+                        <h3>الكتابة الإبداعية وصياغة المحتوى</h3>
+                        <ul>
+                            <li>صياغة نصوص احترافية بناءً على الكلمات المفتاحية.</li>
+                            <li>كتابة رسائل بريد إلكتروني وسير ذاتية (CV) احترافية.</li>
+                            <li>كتابة مقالات علمية ومقالات عرض للمواقع الإلكترونية.</li>
+                        </ul>
+                    </div>
+                    <div class="service-item" id="visual-coordination">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>التنسيق البصري والتدقيق اللغوي</h3>
+                        <ul>
+                            <li>تنسيق المقالات وتدقيقها لغويًا لضمان الجودة والنشر.</li>
+                            <li>تنسيق الكتب والمجلات (قراءة عامة وعلمية) لراحة القارئ.</li>
+                        </ul>
+                    </div>
+                    <div class="service-item" id="translation">
+                        <i class="fas fa-language"></i>
+                        <h3>الترجمة الاحترافية</h3>
+                        <ul>
+                            <li>ترجمة احترافية ودقيقة بين اللغتين التركية والعربية.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section" style="background-color: var(--lighter-bg);">
+            <div class="container">
+                <h2>أعمالنا المميزة 🌟</h2>
+                <p>نحن فخورون بمشاريعنا السابقة التي تعكس إبداعنا واحترافيتنا، إليك بعضًا من أحدث ما قدمناه.</p>
+
+                <div class="swiper portfolio-carousel">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="https://via.placeholder.com/600x400/FF5733/FFFFFF?text=3D+Logo+for+Tech+Co" alt="شعار ثلاثي الأبعاد لشركة تقنية">
+                            <div class="info">
+                                <h3>شعار 3D مبتكر لشركة تقنية</h3>
+                                <p>تحويل شعار تقليدي إلى تصميم ثلاثي الأبعاد ديناميكي وجذاب.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://via.placeholder.com/600x400/33FF57/FFFFFF?text=Book+Cover+Design" alt="تصميم غلاف كتاب رائج">
+                            <div class="info">
+                                <h3>غلاف كتاب "رحلة الأمل"</h3>
+                                <p>تصميم غلاف يعكس محتوى الكتاب ويجذب القراء من النظرة الأولى.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://via.placeholder.com/600x400/3357FF/FFFFFF?text=Ad+Campaign+Design" alt="تصميم حملة إعلانية لمعهد تعليمي">
+                            <div class="info">
+                                <h3>حملة إعلانية لمعهد تعليمي</h3>
+                                <p>تصميم سلسلة إعلانات مؤثرة لزيادة التسجيل في الدورات.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://via.placeholder.com/600x400/FFFF33/333333?text=YouTube+Intro+Video" alt="مقدمة فيديو لقناة يوتيوب">
+                            <div class="info">
+                                <h3>مقدمة فيديو لقناة يوتيوب</h3>
+                                <p>موشن جرافيك احترافي يضيف لمسة مميزة لبداية الفيديوهات.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://via.placeholder.com/600x400/5733FF/FFFFFF?text=Organizational+ID" alt="تصميم هوية بصرية لمؤسسة">
+                            <div class="info">
+                                <h3>هوية بصرية كاملة لمؤسسة خيرية</h3>
+                                <p>تصميم بطاقات تعريفية، ورق رسمي، ومطبوعات للموظفين.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2>من نحن؟ 🤝</h2>
+                <p>نحن DesignKraaft، فريق شغوف من المصممين والمبتكرين والكتاب والمترجمين. نؤمن بأن التصميم الجيد والمحتوى المؤثر هما مفتاح النجاح لأي مشروع أو هوية. نسعى دائمًا لتقديم حلول بصرية وكتابية مبتكرة ومُخصصة لعملائنا في مختلف المجالات، بدءًا من الأفراد وصولاً إلى كبرى المنظمات.</p>
+                <p>نحن نركز على فهم رؤيتك وأهدافك بعمق، ثم نعمل بجد وشغف لتقديم تصاميم ومحتوى لا يبدو رائعًا فحسب، بل يحقق النتائج المرجوة ويتجاوز توقعاتك. مهمتنا هي تحويل أفكارك إلى حقيقة بصرية ملموسة ومحتوى نصي مؤثر.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="section" style="background-color: var(--light-bg);">
+            <div class="container">
+                <h2>تواصل معنا 📞</h2>
+                <p>دعنا نبدأ مشروعك القادم معًا! املأ النموذج أدناه وسنتواصل معك قريبًا لنتحدث عن كيفية تحقيق رؤيتك.</p>
+                <form class="contact-form" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">الاسم الكامل:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">الموضوع:</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">رسالتك:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">أرسل الرسالة</button>
+                </form>
+            </div>
+        </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 DesignKraaft. جميع الحقوق محفوظة.</p>
+        <div class="container">
+            <p>&copy; 2025 DesignKraaft. جميع الحقوق محفوظة.</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.twitter.com/yourpage" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/yourpage" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/yourphonenumber" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.linkedin.com/in/yourpage" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
     </footer>
 
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // JavaScript for Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+            });
+        }
+
+        if (closeMobileMenu) {
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        }
+
+        // JavaScript for Desktop Language Dropdown
+        const desktopLangDropdown = document.getElementById('desktop-lang-dropdown');
+        if (desktopLangDropdown) {
+            desktopLangDropdown.addEventListener('click', function(event) {
+                this.classList.toggle('active');
+                event.stopPropagation(); // Prevent document click from closing immediately
+            });
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (event) => {
+                if (desktopLangDropdown && !desktopLangDropdown.contains(event.target)) {
+                    desktopLangDropdown.classList.remove('active');
+                }
+            });
+
+            // Update current language text
+            const desktopLangLinks = desktopLangDropdown.querySelectorAll('.lang-dropdown-content a');
+            const currentLangTextDesktop = document.getElementById('current-lang-text');
+            desktopLangLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentLangTextDesktop.textContent = e.target.textContent;
+                    // Here you would add logic to change the site's language
+                    console.log('Desktop Language selected:', e.target.dataset.lang);
+                    desktopLangDropdown.classList.remove('active'); // Close after selection
+                });
+            });
+        }
+
+        // JavaScript for Mobile Language Dropdown
+        const mobileLangDropdown = document.getElementById('mobile-lang-dropdown');
+        const mobileServicesDropdownToggle = document.getElementById('mobile-services-dropdown-toggle');
+
+        if (mobileLangDropdown) {
+            mobileLangDropdown.addEventListener('click', function(event) {
+                this.classList.toggle('active');
+                event.stopPropagation();
+            });
+            // Note: Mobile menu close handles the document click for the mobile language dropdown
+            
+            // Update current language text for mobile
+            const mobileLangLinks = mobileLangDropdown.querySelectorAll('.lang-dropdown-content a');
+            const currentLangTextMobile = document.getElementById('current-lang-text-mobile');
+            mobileLangLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentLangTextMobile.textContent = e.target.textContent;
+                    // Here you would add logic to change the site's language
+                    console.log('Mobile Language selected:', e.target.dataset.lang);
+                    mobileLangDropdown.classList.remove('active'); // Close after selection
+                    mobileMenu.classList.remove('active'); // Also close mobile menu
+                });
+            });
+        }
+
+        // JavaScript for Mobile Services Dropdown (inside mobile menu)
+        if (mobileServicesDropdownToggle) {
+            mobileServicesDropdownToggle.addEventListener('click', function(event) {
+                // Toggle the 'active' class on the parent list item (has-dropdown)
+                this.classList.toggle('active');
+                // Toggle display of the nested dropdown menu
+                const dropdownMenu = this.querySelector('.dropdown-menu');
+                if (dropdownMenu) {
+                    if (dropdownMenu.style.display === 'block') {
+                        dropdownMenu.style.display = 'none';
+                    } else {
+                        dropdownMenu.style.display = 'block';
+                    }
+                }
+                event.stopPropagation(); // Prevent the click from propagating to mobileMenu
+            });
+            // Ensure dropdown closes if clicking outside the dropdown itself, but inside the mobile menu
+            mobileMenu.addEventListener('click', (event) => {
+                const target = event.target;
+                // If click is not inside the mobile services dropdown, close it
+                if (!target.closest('.mobile-services-dropdown') && mobileServicesDropdownToggle.classList.contains('active')) {
+                     const dropdownMenu = mobileServicesDropdownToggle.querySelector('.dropdown-menu');
+                     if (dropdownMenu) {
+                        dropdownMenu.style.display = 'none';
+                        mobileServicesDropdownToggle.classList.remove('active');
+                     }
+                }
+            });
+        }
+
+        // Initialize Swiper Carousel
+        const swiper = new Swiper('.portfolio-carousel', {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 30,
+            autoplay: {
+                delay: 3000, // 3 seconds
+                disableOnInteraction: false, // Keep autoplaying even after user interaction
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                },
+                992: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Close mobile menu if open
+                if (mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                }
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
