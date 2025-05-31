@@ -21,14 +21,27 @@
 
     <style>
         /* أنماط أساسية لتظهر الصفحة بشكل مقبول قبل إنشاء ملف style.css */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #0056b3;
+            --text-color: #333;
+            --light-bg: #f8f8f8;
+            --lighter-bg: #eef5ff;
+            --white: #fff;
+            --shadow-light: 0 5px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: #f8f8f8;
-            color: #333;
+            background-color: var(--light-bg);
+            color: var(--text-color);
             line-height: 1.6;
+            direction: rtl; /* اتجاه عام لليمين لليسار */
+            text-align: right; /* محاذاة النص الافتراضية */
         }
 
         .container {
@@ -40,26 +53,26 @@
         /* شريط الإعلانات العلوي */
         .announcement-bar {
             background-color: #ff4d4d; /* لون مميز للعرض */
-            color: #fff;
+            color: var(--white);
             text-align: center;
             padding: 10px 0;
             font-size: 1.1em;
             font-weight: bold;
-            overflow: hidden; /* لإخفاء الفائض عند الحركة */
+            overflow: hidden;
             position: relative;
         }
         .announcement-bar span {
             display: inline-block;
             white-space: nowrap;
-            animation: marquee 15s linear infinite; /* حركة نص متحرك */
+            animation: marquee-rtl 15s linear infinite; /* حركة نص متحرك من اليمين لليسار */
         }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        @keyframes marquee-rtl {
+            0% { transform: translateX(-100%); } /* يبدأ من أقصى اليمين */
+            100% { transform: translateX(100%); } /* ينتهي في أقصى اليسار */
         }
 
         header {
-            background-color: #fff;
+            background-color: var(--white);
             padding: 20px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             position: sticky;
@@ -69,16 +82,17 @@
 
         nav {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* الشعار على اليسار، القائمة على اليمين */
             align-items: center;
         }
 
         .logo {
             font-family: 'Changa', sans-serif;
             font-size: 2em;
-            color: #007bff; /* لون مميز للوجو */
+            color: var(--primary-color);
             font-weight: bold;
             text-decoration: none;
+            order: 1; /* الشعار على اليسار */
         }
 
         nav ul {
@@ -87,15 +101,16 @@
             padding: 0;
             display: flex;
             align-items: center;
+            order: 2; /* القائمة على اليمين */
         }
 
         nav ul li {
-            position: relative; /* لتحديد مكان القائمة المنسدلة */
-            margin-right: 30px; /* للغة العربية تكون المسافة على اليمين */
+            position: relative;
+            margin-left: 30px; /* مسافة بين العناصر */
         }
 
         nav ul li:last-child {
-            margin-right: 0;
+            margin-left: 0;
         }
 
         nav ul li a {
@@ -108,21 +123,22 @@
         }
 
         nav ul li a:hover {
-            color: #007bff;
+            color: var(--primary-color);
         }
 
-        /* أنماط القائمة المنسدلة للخدمات */
+        /* زر قائمة الخدمات المنسدلة */
         .dropdown-menu {
             display: none;
             position: absolute;
-            background-color: #fff;
+            background-color: var(--white);
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             min-width: 200px;
             z-index: 1;
             border-radius: 5px;
-            top: 100%; /* تظهر أسفل الرابط الرئيسي */
-            right: 0; /* لمحاذاة القائمة لليمين */
+            top: 100%;
+            left: 0; /* تظهر القائمة المنسدلة على اليسار لكي لا تختفي عند اليمين */
             padding: 10px 0;
+            text-align: right;
         }
 
         .dropdown-menu li {
@@ -130,49 +146,103 @@
         }
 
         .dropdown-menu li a {
-            color: #333;
+            color: var(--text-color);
             padding: 12px 16px;
             text-decoration: none;
             display: block;
-            text-align: right; /* محاذاة النص لليمين */
             transition: background-color 0.2s ease;
         }
 
         .dropdown-menu li a:hover {
             background-color: #f1f1f1;
-            color: #007bff;
+            color: var(--primary-color);
         }
 
         nav ul li.has-dropdown:hover .dropdown-menu {
             display: block;
         }
 
-        /* أزرار اللغات */
-        .language-switcher {
-            margin-left: 20px; /* مسافة عن قائمة التنقل الرئيسية */
-        }
-        .language-switcher a {
-            text-decoration: none;
-            color: #555;
-            font-weight: bold;
-            margin-left: 10px; /* مسافة بين الأزرار */
-            transition: color 0.3s ease;
-        }
-        .language-switcher a:hover {
-            color: #007bff;
+        /* زر اللغات المنسدل */
+        .lang-dropdown {
+            position: relative;
+            margin-left: 20px;
+            cursor: pointer;
+            text-align: left; /* للحفاظ على تنسيق الزر من اليسار */
         }
 
+        .lang-dropdown-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .lang-dropdown-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        .lang-dropdown-btn i {
+            font-size: 0.8em;
+            margin-left: 5px; /* مسافة بين النص والأيقونة */
+        }
+
+        .lang-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            top: 100%;
+            left: 0; /* تظهر القائمة على اليسار */
+            padding: 10px 0;
+            text-align: right;
+        }
+
+        .lang-dropdown-content a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s ease;
+        }
+
+        .lang-dropdown-content a:hover {
+            background-color: #f1f1f1;
+            color: var(--primary-color);
+        }
+
+        .lang-dropdown.active .lang-dropdown-content {
+            display: block;
+        }
+
+        /* قائمة الهامبرغر للجوال */
+        .menu-toggle {
+            display: none; /* مخفية افتراضياً */
+            font-size: 2em;
+            color: var(--text-color);
+            cursor: pointer;
+            order: 3; /* تظهر على أقصى اليمين في الجوال */
+        }
 
         .hero {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1500x800.png?text=Creative+Design+Background') no-repeat center center/cover;
-            color: #fff;
+            color: var(--white);
             text-align: center;
             padding: 100px 20px;
+            background-position: center;
+            background-size: cover;
         }
 
         .hero h1 {
             font-size: 3.5em;
             margin-bottom: 20px;
+            direction: rtl; /* لضمان اتجاه النص داخل الh1 */
         }
 
         .hero p {
@@ -181,12 +251,13 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            direction: rtl;
         }
 
         .btn {
             display: inline-block;
-            background-color: #007bff;
-            color: #fff;
+            background-color: var(--primary-color);
+            color: var(--white);
             padding: 15px 30px;
             text-decoration: none;
             border-radius: 5px;
@@ -195,7 +266,7 @@
         }
 
         .btn:hover {
-            background-color: #0056b3;
+            background-color: var(--secondary-color);
         }
 
         .section {
@@ -206,7 +277,7 @@
         .section h2 {
             font-size: 2.5em;
             margin-bottom: 40px;
-            color: #007bff;
+            color: var(--primary-color);
             position: relative;
         }
         .section h2::after {
@@ -217,7 +288,7 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background-color: #007bff;
+            background-color: var(--primary-color);
             border-radius: 2px;
         }
 
@@ -229,72 +300,89 @@
         }
 
         .service-item {
-            background-color: #fff;
+            background-color: var(--white);
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-light);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: right; /* محاذاة النص داخل عنصر الخدمة */
+            text-align: right;
+            direction: rtl;
         }
 
         .service-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-medium);
         }
 
         .service-item i {
             font-size: 3em;
-            color: #007bff;
+            color: var(--primary-color);
             margin-bottom: 20px;
-            display: block; /* لجعل الأيقونة في سطر خاص بها */
-            text-align: right; /* محاذاة الأيقونة لليمين */
+            display: block;
+            text-align: right;
         }
 
         .service-item h3 {
             font-size: 1.8em;
             margin-bottom: 15px;
-            color: #333;
+            color: var(--text-color);
         }
 
-        .service-item p {
-            color: #666;
+        .service-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .service-item li {
+            margin-bottom: 10px;
             font-size: 1.1em;
+            color: #666;
+            position: relative;
+            padding-right: 25px; /* مسافة للأيقونة */
+        }
+        .service-item li::before {
+            content: "\f00c"; /* أيقونة علامة صح */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #28a745; /* لون أخضر */
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 0.9em;
         }
 
         /* أنماط الكاروسيل (القالب المتقلب) */
         .portfolio-carousel {
             margin-top: 50px;
-            /* أنماط Swiper.js الأساسية (إذا كنت تستخدمها) */
-            /* .swiper-container, .swiper-slide, etc. */
         }
 
         .swiper-slide {
-            background-color: #fff;
+            background-color: var(--white);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-            text-align: right; /* محاذاة النص داخل الشرائح */
-            height: auto; /* للسماح بارتفاع متغير للشرائح */
+            box-shadow: var(--shadow-light);
+            text-align: right;
+            height: auto;
             display: flex;
             flex-direction: column;
         }
 
         .swiper-slide img {
             width: 100%;
-            height: 250px; /* ارتفاع ثابت للصور في الكاروسيل */
+            height: 250px;
             object-fit: cover;
             display: block;
         }
 
         .swiper-slide .info {
             padding: 20px;
-            flex-grow: 1; /* لجعل المحتوى يتمدد لملء المساحة المتاحة */
+            flex-grow: 1;
         }
 
         .swiper-slide .info h3 {
             font-size: 1.5em;
             margin-bottom: 10px;
-            color: #333;
+            color: var(--text-color);
         }
 
         .swiper-slide .info p {
@@ -304,26 +392,26 @@
 
         /* أزرار التنقل في Swiper */
         .swiper-button-next, .swiper-button-prev {
-            color: #007bff !important;
+            color: var(--primary-color) !important;
             font-size: 2em !important;
-            --swiper-navigation-size: 40px; /* لتغيير حجم الأيقونات */
+            --swiper-navigation-size: 40px;
         }
         .swiper-button-next::after, .swiper-button-prev::after {
-            font-size: 40px !important; /* لضبط حجم الأيقونات الفعلية */
+            font-size: 40px !important;
         }
         .swiper-pagination-bullet-active {
-            background-color: #007bff !important;
+            background-color: var(--primary-color) !important;
         }
 
 
         .contact-form {
             max-width: 700px;
             margin: 50px auto 0;
-            background-color: #fff;
+            background-color: var(--white);
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            text-align: right; /* لمحاذاة العناصر من اليمين في النموذج */
+            box-shadow: var(--shadow-light);
+            text-align: right;
         }
 
         .contact-form .form-group {
@@ -345,7 +433,7 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1em;
-            box-sizing: border-box; /* لضمان عدم تجاوز العرض المحدد */
+            box-sizing: border-box;
             text-align: right; /* محاذاة النص المدخل لليمين */
         }
 
@@ -355,8 +443,8 @@
         }
 
         .contact-form button {
-            background-color: #007bff;
-            color: #fff;
+            background-color: var(--primary-color);
+            color: var(--white);
             padding: 15px 30px;
             border: none;
             border-radius: 5px;
@@ -367,12 +455,12 @@
         }
 
         .contact-form button:hover {
-            background-color: #0056b3;
+            background-color: var(--secondary-color);
         }
 
         footer {
             background-color: #333;
-            color: #fff;
+            color: var(--white);
             padding: 40px 0;
             text-align: center;
             font-size: 0.9em;
@@ -383,36 +471,87 @@
             margin-bottom: 20px;
         }
         .social-icons a {
-            color: #fff;
-            font-size: 1.8em; /* حجم أكبر لأيقونات السوشيال ميديا */
+            color: var(--white);
+            font-size: 1.8em;
             margin: 0 12px;
             transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .social-icons a:hover {
-            color: #007bff;
+            color: var(--primary-color);
             transform: translateY(-3px);
         }
 
-        /* استجابة للاحجام الصغيرة */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                align-items: flex-end; /* محاذاة اللوجو والقائمة لليمين في الشاشات الصغيرة */
-            }
+        /* Mobile Menu Styles (قائمة الهامبرغر) */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -250px; /* مخفية في البداية */
+            width: 250px;
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            z-index: 1100;
+            transition: right 0.3s ease-in-out;
+            padding-top: 60px;
+            text-align: right;
+        }
+        .mobile-menu.active {
+            right: 0; /* تظهر عند التفعيل */
+        }
+        .mobile-menu ul {
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            align-items: flex-end; /* محاذاة لليمين */
+        }
+        .mobile-menu ul li {
+            margin: 0;
+            width: 100%;
+            border-bottom: 1px solid #eee;
+        }
+        .mobile-menu ul li a {
+            padding: 15px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            color: var(--text-color);
+        }
+        .mobile-menu ul li a:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* زر إغلاق القائمة الجانبية */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+        
+        /* Media Queries للتوافقية */
+        @media (max-width: 992px) { /* الشاشات اللوحية الكبيرة والمتوسطة */
             nav ul {
-                flex-direction: column;
-                align-items: flex-end; /* محاذاة عناصر القائمة لليمين */
-                margin-top: 20px;
+                display: none; /* إخفاء القائمة الرئيسية في الشاشات الصغيرة */
             }
-            nav ul li {
-                margin-right: 0;
-                margin-bottom: 10px;
+            .menu-toggle {
+                display: block; /* إظهار زر الهامبرغر */
             }
-            .language-switcher {
-                margin-left: 0;
-                margin-top: 10px;
+            .lang-dropdown {
+                margin-left: 0; /* إزالة المسافة ليكون بجانب زر الهامبرغر */
+                order: 2; /* ترتيبه بجانب زر الهامبرغر في الشاشات الصغيرة */
             }
+            .logo {
+                order: 1; /* الشعار يبقى على اليسار */
+            }
+            nav {
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 768px) { /* الشاشات اللوحية الصغيرة والجوالات */
             .hero h1 {
                 font-size: 2.5em;
             }
@@ -422,19 +561,32 @@
             .section h2 {
                 font-size: 2em;
             }
-            .services-grid, .portfolio-grid {
+            .services-grid {
                 grid-template-columns: 1fr;
             }
-            .service-item, .portfolio-item {
+            .service-item {
                 margin: 0 auto;
                 max-width: 400px;
             }
             .announcement-bar span {
-                animation: marquee-small 10s linear infinite;
+                animation: marquee-rtl 10s linear infinite; /* أسرع قليلاً للجوال */
             }
-            @keyframes marquee-small {
-                0% { transform: translateX(100%); }
-                100% { transform: translateX(-100%); }
+            /* Swiper adjustments for smaller screens */
+            .swiper-button-next, .swiper-button-prev {
+                display: none !important; /* إخفاء أزرار التنقل في الجوال */
+            }
+        }
+
+        @media (max-width: 480px) { /* الشاشات الجوال الأصغر */
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 0.9em;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 1em;
             }
         }
     </style>
@@ -449,7 +601,12 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">DesignKraaft</a>
-                <ul>
+                
+                <div class="menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+
+                <ul class="main-nav">
                     <li><a href="#home">الرئيسية</a></li>
                     <li class="has-dropdown">
                         <a href="#services">خدماتنا <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-right: 5px;"></i></a>
@@ -464,17 +621,55 @@
                     <li><a href="#portfolio">أعمالنا</a></li>
                     <li><a href="#about">عنّا</a></li>
                     <li><a href="#contact">اتصل بنا</a></li>
-                    <li class="language-switcher">
-                        <a href="#" class="lang-btn" data-lang="ar">العربية</a>
-                        <a href="#" class="lang-btn" data-lang="tr">Türkçe</a>
-                        <a href="#" class="lang-btn" data-lang="en">English</a>
-                        <a href="#" class="lang-btn" data-lang="de">Deutsch</a>
-                        <a href="#" class="lang-btn" data-lang="fr">Français</a>
+                    
+                    <li class="lang-dropdown desktop-lang-dropdown">
+                        <a href="#" class="lang-dropdown-btn">
+                            <span id="current-lang-text">العربية</span> <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="lang-dropdown-content">
+                            <li><a href="#" data-lang="ar">العربية</a></li>
+                            <li><a href="#" data-lang="tr">Türkçe</a></li>
+                            <li><a href="#" data-lang="en">English</a></li>
+                            <li><a href="#" data-lang="de">Deutsch</a></li>
+                            <li><a href="#" data-lang="fr">Français</a></li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
         </div>
     </header>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <span class="close-btn" id="close-mobile-menu"><i class="fas fa-times"></i></span>
+        <ul>
+            <li><a href="#home">الرئيسية</a></li>
+            <li class="has-dropdown">
+                <a href="#services-mobile">خدماتنا <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-right: 5px;"></i></a>
+                <ul class="dropdown-menu mobile-services-dropdown">
+                    <li><a href="#design-graphic">تصميم الجرافيك والإبداع البصري</a></li>
+                    <li><a href="#video-editing">المونتاج وإنتاج الفيديو الاحترافي</a></li>
+                    <li><a href="#creative-writing">الكتابة الإبداعية وصياغة المحتوى</a></li>
+                    <li><a href="#visual-coordination">التنسيق البصري والتدقيق اللغوي</a></li>
+                    <li><a href="#translation">الترجمة الاحترافية</a></li>
+                </ul>
+            </li>
+            <li><a href="#portfolio">أعمالنا</a></li>
+            <li><a href="#about">عنّا</a></li>
+            <li><a href="#contact">اتصل بنا</a></li>
+            <li class="lang-dropdown mobile-lang-dropdown">
+                <a href="#" class="lang-dropdown-btn">
+                    <span id="current-lang-text-mobile">العربية</span> <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="lang-dropdown-content mobile-lang-content">
+                    <li><a href="#" data-lang="ar">العربية</a></li>
+                    <li><a href="#" data-lang="tr">Türkçe</a></li>
+                    <li><a href="#" data-lang="en">English</a></li>
+                    <li><a href="#" data-lang="de">Deutsch</a></li>
+                    <li><a href="#" data-lang="fr">Français</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
     <main>
         <section id="home" class="hero">
@@ -537,7 +732,7 @@
             </div>
         </section>
 
-        <section id="portfolio" class="section" style="background-color: #eef5ff;">
+        <section id="portfolio" class="section" style="background-color: var(--lighter-bg);">
             <div class="container">
                 <h2>أعمالنا المميزة 🌟</h2>
                 <p>نحن فخورون بمشاريعنا السابقة التي تعكس إبداعنا واحترافيتنا، إليك بعضًا من أحدث ما قدمناه.</p>
@@ -595,7 +790,7 @@
             </div>
         </section>
 
-        <section id="contact" class="section" style="background-color: #f0f0f0;">
+        <section id="contact" class="section" style="background-color: var(--light-bg);">
             <div class="container">
                 <h2>تواصل معنا 📞</h2>
                 <p>دعنا نبدأ مشروعك القادم معًا! املأ النموذج أدناه وسنتواصل معك قريبًا لنتحدث عن كيفية تحقيق رؤيتك.</p>
@@ -632,7 +827,7 @@
                 <a href="https://www.linkedin.com/company/yourcompany" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 <a href="https://www.behance.net/yourprofile" target="_blank" aria-label="Behance"><i class="fab fa-behance"></i></a>
             </div>
-            <p>صمم بفخر بواسطة <a href="https://designkraaft.github.io/" style="color: #007bff; text-decoration: none;">DesignKraaft</a></p>
+            <p>صمم بفخر بواسطة <a href="https://designkraaft.github.io/" style="color: var(--primary-color); text-decoration: none;">DesignKraaft</a></p>
         </div>
     </footer>
 
@@ -665,29 +860,135 @@
             },
         });
 
-        // لتفعيل القائمة المنسدلة باستخدام JavaScript بسيط
+        // JavaScript للقائمة المنسدلة للخدمات (للدسك توب والجوال)
         document.addEventListener('DOMContentLoaded', function() {
-            const dropdownToggle = document.querySelector('.has-dropdown > a');
-            const dropdownMenu = document.querySelector('.dropdown-menu');
-
-            if (dropdownToggle && dropdownMenu) {
-                // للتعامل مع النقر بدلاً من التحويم في الأجهزة التي تعمل باللمس
-                dropdownToggle.addEventListener('click', function(e) {
-                    // منع الانتقال للصفحة إذا كان الرابط الرئيسي لا يؤدي لصفحة محددة
-                    if (this.getAttribute('href') === '#services') {
+            const dropdownToggles = document.querySelectorAll('.has-dropdown > a');
+            
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === '#services' || this.getAttribute('href') === '#services-mobile') {
                         e.preventDefault();
                     }
-                    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-                });
+                    const parentLi = this.parentElement;
+                    const dropdownMenu = parentLi.querySelector('.dropdown-menu');
+                    
+                    // إغلاق كل القوائم المنسدلة الأخرى
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        if (menu !== dropdownMenu) {
+                            menu.style.display = 'none';
+                            menu.parentElement.classList.remove('active'); // إزالة فئة النشاط
+                        }
+                    });
 
-                // إخفاء القائمة عند النقر خارجها
-                document.addEventListener('click', function(e) {
-                    if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
-                        dropdownMenu.style.display = 'none';
+                    // تبديل عرض القائمة المنسدلة الحالية
+                    if (dropdownMenu) {
+                        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+                        parentLi.classList.toggle('active');
                     }
                 });
+            });
+
+            // JavaScript لزر اللغات المنسدل
+            const langDropdownBtns = document.querySelectorAll('.lang-dropdown-btn');
+            langDropdownBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const parentDropdown = this.closest('.lang-dropdown');
+                    const langContent = parentDropdown.querySelector('.lang-dropdown-content');
+
+                    // إغلاق كل قوائم اللغات المنسدلة الأخرى
+                    document.querySelectorAll('.lang-dropdown-content').forEach(content => {
+                        if (content !== langContent) {
+                            content.style.display = 'none';
+                            content.closest('.lang-dropdown').classList.remove('active');
+                        }
+                    });
+
+                    // تبديل عرض قائمة اللغات الحالية
+                    if (langContent) {
+                        langContent.style.display = langContent.style.display === 'block' ? 'none' : 'block';
+                        parentDropdown.classList.toggle('active');
+                    }
+                });
+            });
+            
+            // إخفاء جميع القوائم المنسدلة عند النقر خارجها
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.has-dropdown') && !e.target.closest('.lang-dropdown')) {
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        menu.style.display = 'none';
+                        menu.parentElement.classList.remove('active');
+                    });
+                    document.querySelectorAll('.lang-dropdown-content').forEach(content => {
+                        content.style.display = 'none';
+                        content.closest('.lang-dropdown').classList.remove('active');
+                    });
+                }
+            });
+
+            // JavaScript لقائمة الهامبرغر
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMobileMenuBtn = document.getElementById('close-mobile-menu');
+
+            if (mobileMenuToggle && mobileMenu && closeMobileMenuBtn) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // لمنع التمرير عند فتح القائمة
+                });
+
+                closeMobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = ''; // إعادة التمرير
+                });
+
+                // إغلاق القائمة عند النقر على رابط داخلها
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                        // إغلاق القوائم المنسدلة في الجوال بعد النقر على الرابط
+                        document.querySelectorAll('.dropdown-menu').forEach(menu => menu.style.display = 'none');
+                    });
+                });
             }
+
+            // JavaScript لتحديث نص اللغة الحالية
+            const updateLanguageText = (langCode, targetElementId) => {
+                let langText = '';
+                switch(langCode) {
+                    case 'ar': langText = 'العربية'; break;
+                    case 'tr': langText = 'Türkçe'; break;
+                    case 'en': langText = 'English'; break;
+                    case 'de': langText = 'Deutsch'; break;
+                    case 'fr': langText = 'Français'; break;
+                    default: langText = 'العربية';
+                }
+                document.getElementById(targetElementId).textContent = langText;
+            };
+
+            // عند تحميل الصفحة، تعيين اللغة الافتراضية
+            updateLanguageText('ar', 'current-lang-text');
+            updateLanguageText('ar', 'current-lang-text-mobile');
+
+            // عند النقر على زر اللغة، تحديث النص
+            document.querySelectorAll('.lang-dropdown-content a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const selectedLang = this.getAttribute('data-lang');
+                    // في بيئة حقيقية، هنا ستقوم بتغيير لغة الموقع بالكامل
+                    // For now, just update the displayed text
+                    if (this.closest('.mobile-lang-content')) {
+                        updateLanguageText(selectedLang, 'current-lang-text-mobile');
+                    } else {
+                        updateLanguageText(selectedLang, 'current-lang-text');
+                    }
+                    // إغلاق القائمة المنسدلة بعد الاختيار
+                    this.closest('.lang-dropdown-content').style.display = 'none';
+                    this.closest('.lang-dropdown').classList.remove('active');
+                });
+            });
         });
     </script>
-    </body>
+</body>
 </html>
