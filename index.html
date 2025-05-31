@@ -77,7 +77,7 @@
         /* Animation for text to appear from LEFT and scroll towards RIGHT */
         @keyframes marquee-ltr {
             0% { transform: translateX(-100%); } /* Start from left outside */
-            100% { transform: translateX(100%); }  /* End at right outside */
+            100% { transform: translateX(100%); } /* End at right outside */
         }
 
 
@@ -168,68 +168,6 @@
         }
 
         nav ul.main-nav li.has-dropdown:hover .dropdown-menu {
-            display: block;
-        }
-
-        /* زر اللغات المنسدل */
-        .lang-dropdown {
-            position: relative;
-            cursor: pointer;
-        }
-        /* Hide desktop language dropdown by default */
-        .lang-dropdown.desktop-lang-dropdown {
-            display: none;
-        }
-
-        .lang-dropdown-btn {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            transition: background-color 0.3s ease;
-            white-space: nowrap; /* Prevent text wrapping */
-        }
-        .lang-dropdown-btn:hover {
-            background-color: var(--secondary-color);
-        }
-        .lang-dropdown-btn i {
-            font-size: 0.8em;
-            margin-right: 5px; /* Adjust margin for RTL */
-        }
-
-        .lang-dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: var(--white);
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 5px;
-            top: 100%;
-            left: 0;
-            padding: 10px 0;
-            text-align: right;
-        }
-
-        .lang-dropdown-content a {
-            color: var(--text-color);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            transition: background-color 0.2s ease;
-        }
-
-        .lang-dropdown-content a:hover {
-            background-color: #f1f1f1;
-            color: var(--primary-color);
-        }
-
-        .lang-dropdown.active .lang-dropdown-content {
             display: block;
         }
 
@@ -555,10 +493,6 @@
             .menu-toggle {
                 display: none; /* إخفاء زر الهامبرغر */
             }
-            .lang-dropdown.desktop-lang-dropdown {
-                display: block; /* إظهار زر اللغة للديسك توب */
-                margin-left: 20px; /* مسافة عن باقي القائمة */
-            }
             .mobile-menu {
                 display: none; /* إخفاء القائمة الجانبية تماماً */
             }
@@ -567,23 +501,6 @@
         @media (max-width: 992px) { /* للشاشات اللوحية الكبيرة والجوالات */
             /* عناصر الـ nav ستكون مرتبة تلقائياً بناءً على flexbox إذا لم يتم تحديد order */
             /* الشعار على اليسار، زر الهامبرغر على اليمين */
-            .lang-dropdown.mobile-lang-dropdown {
-                display: block; /* إظهار زر اللغة داخل قائمة الجوال */
-            }
-            .mobile-menu .lang-dropdown-btn {
-                width: calc(100% - 40px); /* ليتناسب مع البادينغ */
-                margin: 15px auto; /* مسافة علوية وسفلية وتوسيط */
-            }
-            .mobile-menu .lang-dropdown-content {
-                position: static; /* لكي لا تخرج من القائمة الجانبية */
-                box-shadow: none;
-                border-top: 1px solid #eee;
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-            .mobile-menu .lang-dropdown-content li a {
-                padding: 10px 0;
-            }
         }
 
         @media (max-width: 768px) { /* الشاشات اللوحية الصغيرة والجوالات */
@@ -656,19 +573,6 @@
                     <li><a href="#portfolio">أعمالنا</a></li>
                     <li><a href="#about">عنّا</a></li>
                     <li><a href="#contact">اتصل بنا</a></li>
-                    
-                    <li class="lang-dropdown desktop-lang-dropdown">
-                        <a href="#" class="lang-dropdown-btn">
-                            <span id="current-lang-text">العربية</span> <i class="fas fa-chevron-down"></i>
-                        </a>
-                        <ul class="lang-dropdown-content">
-                            <li><a href="#" data-lang="ar">العربية</a></li>
-                            <li><a href="#" data-lang="tr">Türkçe</a></li>
-                            <li><a href="#" data-lang="en">English</a></li>
-                            <li><a href="#" data-lang="de">Deutsch</a></li>
-                            <li><a href="#" data-lang="fr">Français</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </nav>
         </div>
@@ -691,18 +595,6 @@
             <li><a href="#portfolio">أعمالنا</a></li>
             <li><a href="#about">عنّا</a></li>
             <li><a href="#contact">اتصل بنا</a></li>
-            <li class="lang-dropdown mobile-lang-dropdown">
-                <a href="#" class="lang-dropdown-btn">
-                    <span id="current-lang-text-mobile">العربية</span> <i class="fas fa-chevron-down"></i>
-                </a>
-                <ul class="lang-dropdown-content mobile-lang-content">
-                    <li><a href="#" data-lang="ar">العربية</a></li>
-                    <li><a href="#" data-lang="tr">Türkçe</a></li>
-                    <li><a href="#" data-lang="en">English</a></li>
-                    <li><a href="#" data-lang="de">Deutsch</a></li>
-                    <li><a href="#" data-lang="fr">Français</a></li>
-                </ul>
-            </li>
         </ul>
     </div>
 
@@ -859,20 +751,22 @@
                 <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.twitter.com/yourpage" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                 <a href="https://www.instagram.com/yourpage" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/company/yourcompany" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://www.behance.net/yourprofile" target="_blank" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                <a href="https://www.linkedin.com/in/yourpage" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             </div>
-            <p>صمم بفخر بواسطة <a href="https://designkraaft.github.io/" style="color: var(--primary-color); text-decoration: none;">DesignKraaft</a></p>
         </div>
     </footer>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
-        // تهيئة Swiper Carousel
-        var swiper = new Swiper('.portfolio-carousel', {
+        // Swiper Initialization
+        const swiper = new Swiper('.portfolio-carousel', {
+            loop: true,
             slidesPerView: 1,
             spaceBetween: 30,
-            loop: true,
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            },
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
@@ -881,12 +775,8 @@
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-            autoplay: {
-                delay: 4000, // تغيير الشرائح كل 4 ثوانٍ
-                disableOnInteraction: false,
-            },
             breakpoints: {
-                768: {
+                640: {
                     slidesPerView: 2,
                 },
                 1024: {
@@ -895,146 +785,36 @@
             },
         });
 
-        // JavaScript للقائمة المنسدلة للخدمات (للدسك توب والجوال)
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownToggles = document.querySelectorAll('.has-dropdown > a');
-            
-            dropdownToggles.forEach(toggle => {
-                toggle.addEventListener('click', function(e) {
-                    if (this.getAttribute('href').startsWith('#services')) { 
-                        e.preventDefault();
-                    }
-                    const parentLi = this.parentElement;
-                    const dropdownMenu = parentLi.querySelector('.dropdown-menu');
-                    
-                    // إغلاق كل القوائم المنسدلة الأخرى
-                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                        if (menu !== dropdownMenu) {
-                            menu.style.display = 'none';
-                            menu.closest('.has-dropdown').classList.remove('active');
-                        }
-                    });
+        // Mobile menu toggle functionality
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
 
-                    // تبديل عرض القائمة المنسدلة الحالية
-                    if (dropdownMenu) {
-                        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-                        parentLi.classList.toggle('active');
-                    }
-                });
-            });
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
 
-            // JavaScript لزر اللغات المنسدل
-            const langDropdownBtns = document.querySelectorAll('.lang-dropdown-btn');
-            langDropdownBtns.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const parentDropdown = this.closest('.lang-dropdown');
-                    const langContent = parentDropdown.querySelector('.lang-dropdown-content');
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
 
-                    // إغلاق كل قوائم اللغات المنسدلة الأخرى
-                    document.querySelectorAll('.lang-dropdown-content').forEach(content => {
-                        if (content !== langContent) {
-                            content.style.display = 'none';
-                            content.closest('.lang-dropdown').classList.remove('active');
-                        }
-                    });
-
-                    // تبديل عرض قائمة اللغات الحالية
-                    if (langContent) {
-                        langContent.style.display = langContent.style.display === 'block' ? 'none' : 'block';
-                        parentDropdown.classList.toggle('active');
-                    }
-                });
-            });
-            
-            // إخفاء جميع القوائم المنسدلة عند النقر خارجها
-            document.addEventListener('click', function(e) {
-                // Check if the click was not inside any dropdown or the mobile menu toggle
-                const isInsideDropdown = e.target.closest('.has-dropdown') || e.target.closest('.lang-dropdown');
-                const isMobileMenuToggle = e.target.closest('.menu-toggle');
-                const isInsideMobileMenu = e.target.closest('.mobile-menu');
-
-                if (!isInsideDropdown && !isMobileMenuToggle && !isInsideMobileMenu) {
-                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                        menu.style.display = 'none';
-                        menu.closest('.has-dropdown').classList.remove('active');
-                    });
-                    document.querySelectorAll('.lang-dropdown-content').forEach(content => {
-                        content.style.display = 'none';
-                        content.closest('.lang-dropdown').classList.remove('active');
-                    });
-                     // Close mobile menu if open and click outside
-                    const mobileMenu = document.getElementById('mobile-menu');
-                    if (mobileMenu && mobileMenu.classList.contains('active')) {
-                        mobileMenu.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
-                }
-            });
-
-            // JavaScript لقائمة الهامبرغر
-            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMobileMenuBtn = document.getElementById('close-mobile-menu');
-
-            if (mobileMenuToggle && mobileMenu && closeMobileMenuBtn) {
-                mobileMenuToggle.addEventListener('click', function() {
-                    mobileMenu.classList.add('active');
-                    document.body.style.overflow = 'hidden'; // لمنع التمرير عند فتح القائمة
-                });
-
-                closeMobileMenuBtn.addEventListener('click', function() {
-                    mobileMenu.classList.remove('active');
-                    document.body.style.overflow = ''; // إعادة التمرير
-                });
-
-                // إغلاق القائمة عند النقر على رابط داخلها
-                mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', function() {
-                        mobileMenu.classList.remove('active');
-                        document.body.style.overflow = '';
-                        // إغلاق القوائم المنسدلة في الجوال بعد النقر على الرابط
-                        document.querySelectorAll('.dropdown-menu').forEach(menu => menu.style.display = 'none');
-                    });
-                });
-            }
-
-            // JavaScript لتحديث نص اللغة الحالية
-            const updateLanguageText = (langCode, targetElementId) => {
-                let langText = '';
-                switch(langCode) {
-                    case 'ar': langText = 'العربية'; break;
-                    case 'tr': langText = 'Türkçe'; break;
-                    case 'en': langText = 'English'; break;
-                    case 'de': langText = 'Deutsch'; break;
-                    case 'fr': langText = 'Français'; break;
-                    default: langText = 'العربية';
-                }
-                document.getElementById(targetElementId).textContent = langText;
-            };
-
-            // عند تحميل الصفحة، تعيين اللغة الافتراضية
-            updateLanguageText('ar', 'current-lang-text');
-            updateLanguageText('ar', 'current-lang-text-mobile');
-
-            // عند النقر على زر اللغة، تحديث النص
-            document.querySelectorAll('.lang-dropdown-content a').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const selectedLang = this.getAttribute('data-lang');
-                    // في بيئة حقيقية، هنا ستقوم بتغيير لغة الموقع بالكامل
-                    // For now, just update the displayed text
-                    if (this.closest('.mobile-lang-content')) {
-                        updateLanguageText(selectedLang, 'current-lang-text-mobile');
-                    } else {
-                        updateLanguageText(selectedLang, 'current-lang-text');
-                    }
-                    // إغلاق القائمة المنسدلة بعد الاختيار
-                    this.closest('.lang-dropdown-content').style.display = 'none';
-                    this.closest('.lang-dropdown').classList.remove('active');
-                });
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
             });
         });
+
+        // Dropdown menu functionality for mobile (services dropdown)
+        const mobileServicesDropdownToggle = document.querySelector('.mobile-menu .has-dropdown > a');
+        if (mobileServicesDropdownToggle) {
+            mobileServicesDropdownToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                const dropdownMenu = mobileServicesDropdownToggle.nextElementSibling;
+                dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+            });
+        }
     </script>
 </body>
 </html>
