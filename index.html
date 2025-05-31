@@ -1,252 +1,445 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>معرض أعمال التصميم</title>
-<style>
-  /* إعادة ضبط */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #f9f9f9;
-    color: #222;
-    direction: rtl;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignKraaft | خدمات تصميم إبداعية ومتكاملة</title>
+    <meta name="description" content="DesignKraaft تقدم خدمات تصميم جرافيكي، تصميم واجهات المستخدم، تصميم الشعارات، والهوية البصرية. نحول أفكارك إلى تصاميم مبهرة.">
+    <meta name="keywords" content="تصميم جرافيك، تصميم شعارات، تصميم هوية بصرية، تصميم واجهات مستخدم، UI/UX، تصميم مواقع، تصميم إبداعي، خدمات تصميم">
 
-  /* الشريط الإخباري */
-  .news-ticker {
-    background: #003366;
-    color: white;
-    overflow: hidden;
-    white-space: nowrap;
-    box-sizing: content-box;
-    padding: 10px 0;
-    font-weight: bold;
-  }
-  .news-ticker span {
-    display: inline-block;
-    padding-left: 100%;
-    animation: ticker 15s linear infinite;
-  }
-  @keyframes ticker {
-    0%   { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-  }
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  /* القائمة العلوية */
-  nav.top-nav {
-    background: #007acc;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: flex-start;
-    gap: 15px;
-  }
-  nav.top-nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 20px;
-  }
-  nav.top-nav a:hover {
-    color: #ffd700;
-  }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Changa:wght@400;700&display=swap" rel="stylesheet">
 
-  /* القائمة الرئيسية */
-  nav.main-nav {
-    background: white;
-    display: flex;
-    justify-content: center;
-    padding: 15px 0;
-    gap: 40px;
-    font-weight: bold;
-    border-bottom: 2px solid #ddd;
-  }
-  nav.main-nav a {
-    color: #007acc;
-    text-decoration: none;
-    font-size: 18px;
-  }
-  nav.main-nav a:hover {
-    color: #003366;
-  }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  /* الحاوية الرئيسية */
-  .container {
-    display: flex;
-    max-width: 1200px;
-    margin: 30px auto;
-    gap: 20px;
-  }
+    <link rel="stylesheet" href="assets/css/style.css">
 
-  /* عمود آخر المنشورات */
-  aside.latest-posts {
-    flex: 1;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px #ccc;
-    height: fit-content;
-  }
-  aside.latest-posts h2 {
-    margin-bottom: 15px;
-    color: #007acc;
-  }
-  aside.latest-posts ul {
-    list-style: none;
-  }
-  aside.latest-posts ul li {
-    margin-bottom: 12px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  aside.latest-posts ul li:hover {
-    color: #005999;
-  }
+    <style>
+        /* أنماط أساسية لتظهر الصفحة بشكل مقبول قبل إنشاء ملف style.css */
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
 
-  /* معرض الصور المتحرك */
-  section.carousel {
-    flex: 3;
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 20px #aaa;
-    background: white;
-  }
-  .slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: 300%;
-  }
-  .slide {
-    width: 100%;
-    flex-shrink: 0;
-    position: relative;
-  }
-  .slide img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-  }
-  .slide figcaption {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(0,0,0,0.6);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 5px;
-    font-size: 16px;
-  }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-  /* أزرار التنقل */
-  .carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0,0,0,0.4);
-    border: none;
-    color: white;
-    font-size: 28px;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  .carousel-btn:hover {
-    background: rgba(0,0,0,0.7);
-  }
-  .carousel-btn.prev {
-    right: 10px;
-  }
-  .carousel-btn.next {
-    left: 10px;
-  }
+        header {
+            background-color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-  /* تفاعل مع العرض */
-  @media (max-width: 900px) {
-    .container {
-      flex-direction: column;
-    }
-    section.carousel {
-      height: 300px;
-    }
-  }
+        nav {
+            display: flex;
+            justify-content.  space-between;
+            align-items: center;
+        }
 
-</style>
+        .logo {
+            font-family: 'Changa', sans-serif;
+            font-size: 2em;
+            color: #007bff; /* لون مميز للوجو */
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 30px; /* للغة العربية تكون المسافة على اليمين */
+        }
+
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #007bff;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1500x800.png?text=Creative+Design+Background') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #007bff;
+            position: relative;
+        }
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #007bff;
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-item {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .service-item i {
+            font-size: 3em;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .service-item h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .service-item p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .portfolio-item {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .portfolio-item .info {
+            padding: 20px;
+        }
+
+        .portfolio-item .info h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .portfolio-item .info p {
+            color: #777;
+            font-size: 1em;
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 50px auto 0;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: right; /* لمحاذاة العناصر من اليمين في النموذج */
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box; /* لضمان عدم تجاوز العرض المحدد */
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
 
-<!-- الشريط الإخباري -->
-<div class="news-ticker" aria-label="شريط إخباري">
-  <span>أحدث أعمالي التصميمية قادمة! تابعني لتكون أول من يرى جديدي... - معرض أعمال تصميمي - مرحباً بك في معرض أعمالي الإبداعية!</span>
-</div>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">DesignKraaft</a>
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#services">خدماتنا</a></li>
+                    <li><a href="#portfolio">أعمالنا</a></li>
+                    <li><a href="#about">عنّا</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<!-- القائمة العلوية: وسائل التواصل الاجتماعي -->
-<nav class="top-nav" aria-label="وسائل التواصل الاجتماعي">
-  <a href="#" title="فيسبوك" target="_blank" rel="noopener">فيسبوك</a>
-  <a href="#" title="إنستجرام" target="_blank" rel="noopener">إنستجرام</a>
-  <a href="#" title="لينكد إن" target="_blank" rel="noopener">لينكد إن</a>
-  <a href="#" title="تويتر" target="_blank" rel="noopener">تويتر</a>
-</nav>
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>نصمم رؤيتك... نصنع تأثيرك.</h1>
+                <p>نحن DesignKraaft، فريق من المصممين المبدعين نلتزم بتحويل أفكارك إلى تصاميم بصرية مبهرة تترك أثراً.</p>
+                <a href="#contact" class="btn">اطلب تصميمك الآن!</a>
+            </div>
+        </section>
 
-<!-- القائمة الرئيسية -->
-<nav class="main-nav" aria-label="القائمة الرئيسية">
-  <a href="#تصاميم">تصاميم</a>
-  <a href="#شعارات">شعارات</a>
-  <a href="#مقالات">مقالات</a>
-</nav>
+        <section id="services" class="section">
+            <div class="container">
+                <h2>خدماتنا الإبداعية ✨</h2>
+                <p>نقدم مجموعة واسعة من خدمات التصميم لتلبية احتياجاتك البصرية الفريدة.</p>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <i class="fas fa-palette"></i>
+                        <h3>تصميم الجرافيك</h3>
+                        <p>تصميم مطبوعات، مواد تسويقية، رسوم توضيحية، والمزيد لإبراز علامتك التجارية.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-brush"></i>
+                        <h3>تصميم الشعارات والهوية البصرية</h3>
+                        <p>بناء هوية بصرية قوية وفريدة تعكس قيم علامتك وتترسخ في الأذهان.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>تصميم واجهات المستخدم (UI/UX)</h3>
+                        <p>نصمم واجهات مستخدم جذابة وسهلة الاستخدام لتجربة رقمية لا تُنسى.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-globe"></i>
+                        <h3>تصميم مواقع الويب</h3>
+                        <p>تصميم مواقع ويب عصرية ومتجاوبة، تجمع بين الجمالية والوظائف العملية.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-video"></i>
+                        <h3>تصميم الرسوم المتحركة والموشن جرافيك</h3>
+                        <p>نقدم قصصك بطريقة حركية مبتكرة وجذابة لجذب جمهورك.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>استشارات تصميم</h3>
+                        <p>نقدم رؤى وإرشادات خبراء لتحسين استراتيجية تصميمك وتحقيق أهدافك.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- المحتوى الرئيسي -->
-<div class="container">
-  <!-- عمود آخر المنشورات -->
-  <aside class="latest-posts" aria-label="آخر المنشورات">
-    <h2>آخر المنشورات</h2>
-    <ul>
-      <li>تصميم شعار شركة تقنية</li>
-      <li>تصميم واجهة تطبيق موبايل</li>
-      <li>تصميم بوستر إعلان</li>
-    </ul>
-  </aside>
+        <section id="portfolio" class="section" style="background-color: #eef5ff;">
+            <div class="container">
+                <h2>أعمالنا المميزة 🌟</h2>
+                <p>نحن فخورون بمشاريعنا السابقة التي تعكس إبداعنا واحترافيتنا.</p>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x300.png?text=Logo+Design+Example" alt="تصميم شعار لشركة ناشئة">
+                        <div class="info">
+                            <h3>تصميم شعار لشركة ناشئة</h3>
+                            <p>هوية بصرية كاملة لشركة تكنولوجيا جديدة.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x300.png?text=Website+UI+Example" alt="تصميم واجهة موقع تجارة إلكترونية">
+                        <div class="info">
+                            <h3>واجهة مستخدم لموقع تجارة إلكترونية</h3>
+                            <p>تصميم تجربة مستخدم سلسة وجذابة لمتجر إلكتروني.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x300.png?text=Brochure+Design+Example" alt="تصميم كتيب تعريفي لشركة عقارية">
+                        <div class="info">
+                            <h3>كتيب تعريفي لشركة عقارية</h3>
+                            <p>تصميم مطبوعات احترافية تبرز مشاريع الشركة.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x300.png?text=Mobile+App+UI+Example" alt="تصميم تطبيق جوال لخدمات التوصيل">
+                        <div class="info">
+                            <h3>واجهة تطبيق توصيل</h3>
+                            <p>تصميم جذاب وسهل الاستخدام لتطبيق جوال.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <!-- معرض الصور المتحرك -->
-  <section class="carousel" aria-label="معرض الصور">
-    <div class="slides">
-      <figure class="slide">
-        <img src="design1.jpg" alt="تصميم شعار شركة تقنية" />
-        <figcaption>تصميم شعار شركة تقنية</figcaption>
-      </figure>
-      <figure class="slide">
-        <img src="design2.jpg" alt="تصميم واجهة تطبيق موبايل" />
-        <figcaption>تصميم واجهة تطبيق موبايل</figcaption>
-      </figure>
-      <figure class="slide">
-        <img src="design3.jpg" alt="تصميم بوستر إعلان" />
-        <figcaption>تصميم بوستر إعلان</figcaption>
-      </figure>
-    </div>
-    <button class="carousel-btn prev" aria-label="السابق">&#10095;</button>
-    <button class="carousel-btn next" aria-label="التالي">&#10094;</button>
-  </section>
-</div>
+        <section id="about" class="section">
+            <div class="container">
+                <h2>من نحن؟ 🤝</h2>
+                <p>نحن DesignKraaft، فريق شغوف من المصممين والمبتكرين. نؤمن بأن التصميم الجيد هو مفتاح النجاح، ونسعى دائمًا لتقديم حلول بصرية مبتكرة ومُخصصة لعملائنا في مختلف المجالات.</p>
+                <p>نحن نركز على فهم رؤيتك وأهدافك، ثم نعمل بجد لتقديم تصاميم لا تبدو رائعة فحسب، بل تحقق النتائج المرجوة وتتجاوز توقعاتك. مهمتنا هي تحويل أفكارك إلى حقيقة بصرية ملموسة.</p>
+            </div>
+        </section>
 
-<script>
-  // جافاسكريبت لمعرض الصور المتحرك
-  const slides = document.querySelector('.slides');
-  const slideCount = document.querySelectorAll('.slide').length;
-  let currentIndex = 0;
+        <section id="contact" class="section" style="background-color: #f0f0f0;">
+            <div class="container">
+                <h2>تواصل معنا 📞</h2>
+                <p>دعنا نبدأ مشروعك القادم معًا! املأ النموذج أدناه وسنتواصل معك قريبًا.</p>
+                <form class="contact-form" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">الاسم الكامل:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">الموضوع:</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">رسالتك:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">أرسل الرسالة</button>
+                </form>
+            </div>
+        </section>
+    </main>
 
-  document.querySelector('.carousel-btn.next').addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % slideCount;
-    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-  });
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 DesignKraaft. جميع الحقوق محفوظة.</p>
+            <div class="social-icons">
+                <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>تم التصميم بواسطة <a href="https://designkraaft.github.io/" style="color: #007bff; text-decoration: none;">DesignKraaft</a></p>
+        </div>
+    </footer>
 
-  document.querySelector('.carousel-btn.prev').addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + slideCount) % slideCount;
-    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-  });
-</script>
-
-</body>
+    </body>
 </html>
