@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DesignKraaft | خدمات تصميم إبداعية ومتكاملة</title>
-    <meta name="description" content="DesignKraaft تقدم خدمات تصميم جرافيكي، تصميم واجهات المستخدم، تصميم الشعارات، والهوية البصرية. نحول أفكارك إلى تصاميم مبهرة.">
-    <meta name="keywords" content="تصميم جرافيك، تصميم شعارات، تصميم هوية بصرية، تصميم واجهات مستخدم، UI/UX، تصميم مواقع، تصميم إبداعي، خدمات تصميم">
+    <title>DesignKraaft | تصميم إبداعي، مونتاج احترافي، محتوى مؤثر، ترجمة دقيقة</title>
+    <meta name="description" content="DesignKraaft: شريكك الموثوق لخدمات تصميم الجرافيك، المونتاج، الكتابة الإبداعية، التنسيق البصري، والترجمة الاحترافية. نحول أفكارك إلى تصاميم بصرية مبهرة ومحتوى مؤثر.">
+    <meta name="keywords" content="تصميم جرافيك، تصميم شعارات، تصميم هوية بصرية، تصميم واجهات مستخدم، UI/UX، تصميم مواقع، تصميم إبداعي، مونتاج فيديو، مقدمات يوتيوب، كتابة إبداعية، CV احترافي، تنسيق كتب، تدقيق لغوي، ترجمة تركي عربي، خدمات تصميم، اعلانات احترافية، تصميم 3D، اغلفة كتب، شهادات تعليمية، DesignKraaft">
 
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Changa:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
     <link rel="stylesheet" href="assets/css/style.css">
 
@@ -32,18 +34,42 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
+        }
+
+        /* شريط الإعلانات العلوي */
+        .announcement-bar {
+            background-color: #ff4d4d; /* لون مميز للعرض */
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1.1em;
+            font-weight: bold;
+            overflow: hidden; /* لإخفاء الفائض عند الحركة */
+            position: relative;
+        }
+        .announcement-bar span {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite; /* حركة نص متحرك */
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
 
         header {
             background-color: #fff;
             padding: 20px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         nav {
             display: flex;
-            justify-content.  space-between;
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -60,9 +86,11 @@
             margin: 0;
             padding: 0;
             display: flex;
+            align-items: center;
         }
 
         nav ul li {
+            position: relative; /* لتحديد مكان القائمة المنسدلة */
             margin-right: 30px; /* للغة العربية تكون المسافة على اليمين */
         }
 
@@ -75,11 +103,65 @@
             color: #555;
             font-weight: bold;
             transition: color 0.3s ease;
+            padding: 5px 0;
+            display: block;
         }
 
         nav ul li a:hover {
             color: #007bff;
         }
+
+        /* أنماط القائمة المنسدلة للخدمات */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            min-width: 200px;
+            z-index: 1;
+            border-radius: 5px;
+            top: 100%; /* تظهر أسفل الرابط الرئيسي */
+            right: 0; /* لمحاذاة القائمة لليمين */
+            padding: 10px 0;
+        }
+
+        .dropdown-menu li {
+            margin: 0;
+        }
+
+        .dropdown-menu li a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: right; /* محاذاة النص لليمين */
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f1f1f1;
+            color: #007bff;
+        }
+
+        nav ul li.has-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* أزرار اللغات */
+        .language-switcher {
+            margin-left: 20px; /* مسافة عن قائمة التنقل الرئيسية */
+        }
+        .language-switcher a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            margin-left: 10px; /* مسافة بين الأزرار */
+            transition: color 0.3s ease;
+        }
+        .language-switcher a:hover {
+            color: #007bff;
+        }
+
 
         .hero {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1500x800.png?text=Creative+Design+Background') no-repeat center center/cover;
@@ -152,6 +234,7 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: right; /* محاذاة النص داخل عنصر الخدمة */
         }
 
         .service-item:hover {
@@ -163,6 +246,8 @@
             font-size: 3em;
             color: #007bff;
             margin-bottom: 20px;
+            display: block; /* لجعل الأيقونة في سطر خاص بها */
+            text-align: right; /* محاذاة الأيقونة لليمين */
         }
 
         .service-item h3 {
@@ -176,47 +261,60 @@
             font-size: 1.1em;
         }
 
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+        /* أنماط الكاروسيل (القالب المتقلب) */
+        .portfolio-carousel {
             margin-top: 50px;
+            /* أنماط Swiper.js الأساسية (إذا كنت تستخدمها) */
+            /* .swiper-container, .swiper-slide, etc. */
         }
 
-        .portfolio-item {
+        .swiper-slide {
             background-color: #fff;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: right; /* محاذاة النص داخل الشرائح */
+            height: auto; /* للسماح بارتفاع متغير للشرائح */
+            display: flex;
+            flex-direction: column;
         }
 
-        .portfolio-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-        }
-
-        .portfolio-item img {
+        .swiper-slide img {
             width: 100%;
-            height: 250px;
+            height: 250px; /* ارتفاع ثابت للصور في الكاروسيل */
             object-fit: cover;
             display: block;
         }
 
-        .portfolio-item .info {
+        .swiper-slide .info {
             padding: 20px;
+            flex-grow: 1; /* لجعل المحتوى يتمدد لملء المساحة المتاحة */
         }
 
-        .portfolio-item .info h3 {
+        .swiper-slide .info h3 {
             font-size: 1.5em;
             margin-bottom: 10px;
             color: #333;
         }
 
-        .portfolio-item .info p {
+        .swiper-slide .info p {
             color: #777;
             font-size: 1em;
         }
+
+        /* أزرار التنقل في Swiper */
+        .swiper-button-next, .swiper-button-prev {
+            color: #007bff !important;
+            font-size: 2em !important;
+            --swiper-navigation-size: 40px; /* لتغيير حجم الأيقونات */
+        }
+        .swiper-button-next::after, .swiper-button-prev::after {
+            font-size: 40px !important; /* لضبط حجم الأيقونات الفعلية */
+        }
+        .swiper-pagination-bullet-active {
+            background-color: #007bff !important;
+        }
+
 
         .contact-form {
             max-width: 700px;
@@ -248,6 +346,7 @@
             border-radius: 5px;
             font-size: 1em;
             box-sizing: border-box; /* لضمان عدم تجاوز العرض المحدد */
+            text-align: right; /* محاذاة النص المدخل لليمين */
         }
 
         .contact-form textarea {
@@ -279,19 +378,72 @@
             font-size: 0.9em;
         }
 
+        .social-icons {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
         .social-icons a {
             color: #fff;
-            font-size: 1.5em;
-            margin: 0 10px;
-            transition: color 0.3s ease;
+            font-size: 1.8em; /* حجم أكبر لأيقونات السوشيال ميديا */
+            margin: 0 12px;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .social-icons a:hover {
             color: #007bff;
+            transform: translateY(-3px);
+        }
+
+        /* استجابة للاحجام الصغيرة */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-end; /* محاذاة اللوجو والقائمة لليمين في الشاشات الصغيرة */
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: flex-end; /* محاذاة عناصر القائمة لليمين */
+                margin-top: 20px;
+            }
+            nav ul li {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .language-switcher {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .section h2 {
+                font-size: 2em;
+            }
+            .services-grid, .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            .service-item, .portfolio-item {
+                margin: 0 auto;
+                max-width: 400px;
+            }
+            .announcement-bar span {
+                animation: marquee-small 10s linear infinite;
+            }
+            @keyframes marquee-small {
+                0% { transform: translateX(100%); }
+                100% { transform: translateX(-100%); }
+            }
         }
     </style>
 </head>
 <body>
+
+    <div class="announcement-bar">
+        <span>🎁 خصم خاص 20% على جميع خدمات التصميم الجديدة! سارع بالحجز الآن واستفد من العرض! ✨</span>
+    </div>
 
     <header>
         <div class="container">
@@ -299,10 +451,26 @@
                 <a href="#" class="logo">DesignKraaft</a>
                 <ul>
                     <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#services">خدماتنا</a></li>
+                    <li class="has-dropdown">
+                        <a href="#services">خدماتنا <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-right: 5px;"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#design-graphic">تصميم الجرافيك والإبداع البصري</a></li>
+                            <li><a href="#video-editing">المونتاج وإنتاج الفيديو الاحترافي</a></li>
+                            <li><a href="#creative-writing">الكتابة الإبداعية وصياغة المحتوى</a></li>
+                            <li><a href="#visual-coordination">التنسيق البصري والتدقيق اللغوي</a></li>
+                            <li><a href="#translation">الترجمة الاحترافية</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#portfolio">أعمالنا</a></li>
                     <li><a href="#about">عنّا</a></li>
                     <li><a href="#contact">اتصل بنا</a></li>
+                    <li class="language-switcher">
+                        <a href="#" class="lang-btn" data-lang="ar">العربية</a>
+                        <a href="#" class="lang-btn" data-lang="tr">Türkçe</a>
+                        <a href="#" class="lang-btn" data-lang="en">English</a>
+                        <a href="#" class="lang-btn" data-lang="de">Deutsch</a>
+                        <a href="#" class="lang-btn" data-lang="fr">Français</a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -312,45 +480,58 @@
         <section id="home" class="hero">
             <div class="container">
                 <h1>نصمم رؤيتك... نصنع تأثيرك.</h1>
-                <p>نحن DesignKraaft، فريق من المصممين المبدعين نلتزم بتحويل أفكارك إلى تصاميم بصرية مبهرة تترك أثراً.</p>
+                <p>نحن DesignKraaft، فريق من المصممين المبدعين نلتزم بتحويل أفكارك إلى تصاميم بصرية مبهرة ومحتوى مؤثر يترك أثراً لا ينسى.</p>
                 <a href="#contact" class="btn">اطلب تصميمك الآن!</a>
             </div>
         </section>
 
         <section id="services" class="section">
             <div class="container">
-                <h2>خدماتنا الإبداعية ✨</h2>
-                <p>نقدم مجموعة واسعة من خدمات التصميم لتلبية احتياجاتك البصرية الفريدة.</p>
+                <h2>خدماتنا الإبداعية المتكاملة ✨</h2>
+                <p>في DesignKraaft، نجمع بين الإبداع والخبرة لتقديم حلول متكاملة تلبي تطلعاتكم في مختلف المجالات.</p>
                 <div class="services-grid">
-                    <div class="service-item">
-                        <i class="fas fa-palette"></i>
-                        <h3>تصميم الجرافيك</h3>
-                        <p>تصميم مطبوعات، مواد تسويقية، رسوم توضيحية، والمزيد لإبراز علامتك التجارية.</p>
+                    <div class="service-item" id="design-graphic">
+                        <i class="fas fa-paint-brush"></i>
+                        <h3>تصميم الجرافيك والإبداع البصري</h3>
+                        <ul>
+                            <li>تصميم أغلفة الكتب والشهادات التعليمية.</li>
+                            <li>تصميم هوية شخصية للمنظمات والشركات لموظفيها.</li>
+                            <li>تصميم شعارات احترافية (مع إمكانية التحويل لـ 3D).</li>
+                            <li>تصميم إعلانات تسويقية جذابة (لمعاهد، منظمات، حملات إعلامية).</li>
+                            <li>تصميم أغلفة ومنشورات فيسبوك وإنستغرام.</li>
+                        </ul>
                     </div>
-                    <div class="service-item">
-                        <i class="fas fa-brush"></i>
-                        <h3>تصميم الشعارات والهوية البصرية</h3>
-                        <p>بناء هوية بصرية قوية وفريدة تعكس قيم علامتك وتترسخ في الأذهان.</p>
-                    </div>
-                    <div class="service-item">
-                        <i class="fas fa-mobile-alt"></i>
-                        <h3>تصميم واجهات المستخدم (UI/UX)</h3>
-                        <p>نصمم واجهات مستخدم جذابة وسهلة الاستخدام لتجربة رقمية لا تُنسى.</p>
-                    </div>
-                    <div class="service-item">
-                        <i class="fas fa-globe"></i>
-                        <h3>تصميم مواقع الويب</h3>
-                        <p>تصميم مواقع ويب عصرية ومتجاوبة، تجمع بين الجمالية والوظائف العملية.</p>
-                    </div>
-                    <div class="service-item">
+                    <div class="service-item" id="video-editing">
                         <i class="fas fa-video"></i>
-                        <h3>تصميم الرسوم المتحركة والموشن جرافيك</h3>
-                        <p>نقدم قصصك بطريقة حركية مبتكرة وجذابة لجذب جمهورك.</p>
+                        <h3>المونتاج وإنتاج الفيديو الاحترافي</h3>
+                        <ul>
+                            <li>تحويل الشعارات إلى مقدمات فيديو متحركة لقنوات اليوتيوب والتيك توك.</li>
+                            <li>إنشاء فيديوهات عرض تقديمية احترافية للمشاريع والشركات.</li>
+                        </ul>
                     </div>
-                    <div class="service-item">
-                        <i class="fas fa-lightbulb"></i>
-                        <h3>استشارات تصميم</h3>
-                        <p>نقدم رؤى وإرشادات خبراء لتحسين استراتيجية تصميمك وتحقيق أهدافك.</p>
+                    <div class="service-item" id="creative-writing">
+                        <i class="fas fa-pen-nib"></i>
+                        <h3>الكتابة الإبداعية وصياغة المحتوى</h3>
+                        <ul>
+                            <li>صياغة نصوص احترافية بناءً على الكلمات المفتاحية.</li>
+                            <li>كتابة رسائل بريد إلكتروني وسير ذاتية (CV) احترافية.</li>
+                            <li>كتابة مقالات علمية ومقالات عرض للمواقع الإلكترونية.</li>
+                        </ul>
+                    </div>
+                    <div class="service-item" id="visual-coordination">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>التنسيق البصري والتدقيق اللغوي</h3>
+                        <ul>
+                            <li>تنسيق المقالات وتدقيقها لغويًا لضمان الجودة والنشر.</li>
+                            <li>تنسيق الكتب والمجلات (قراءة عامة وعلمية) لراحة القارئ.</li>
+                        </ul>
+                    </div>
+                    <div class="service-item" id="translation">
+                        <i class="fas fa-language"></i>
+                        <h3>الترجمة الاحترافية</h3>
+                        <ul>
+                            <li>ترجمة احترافية ودقيقة بين اللغتين التركية والعربية.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -359,36 +540,49 @@
         <section id="portfolio" class="section" style="background-color: #eef5ff;">
             <div class="container">
                 <h2>أعمالنا المميزة 🌟</h2>
-                <p>نحن فخورون بمشاريعنا السابقة التي تعكس إبداعنا واحترافيتنا.</p>
-                <div class="portfolio-grid">
-                    <div class="portfolio-item">
-                        <img src="https://via.placeholder.com/400x300.png?text=Logo+Design+Example" alt="تصميم شعار لشركة ناشئة">
-                        <div class="info">
-                            <h3>تصميم شعار لشركة ناشئة</h3>
-                            <p>هوية بصرية كاملة لشركة تكنولوجيا جديدة.</p>
+                <p>نحن فخورون بمشاريعنا السابقة التي تعكس إبداعنا واحترافيتنا، إليك بعضًا من أحدث ما قدمناه.</p>
+
+                <div class="swiper portfolio-carousel">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="https://via.placeholder.com/600x400/FF5733/FFFFFF?text=3D+Logo+for+Tech+Co" alt="شعار ثلاثي الأبعاد لشركة تقنية">
+                            <div class="info">
+                                <h3>شعار 3D مبتكر لشركة تقنية</h3>
+                                <p>تحويل شعار تقليدي إلى تصميم ثلاثي الأبعاد ديناميكي وجذاب.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://via.placeholder.com/600x400/33FF57/FFFFFF?text=Book+Cover+Design" alt="تصميم غلاف كتاب رائج">
+                            <div class="info">
+                                <h3>غلاف كتاب "رحلة الأمل"</h3>
+                                <p>تصميم غلاف يعكس محتوى الكتاب ويجذب القراء من النظرة الأولى.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://via.placeholder.com/600x400/3357FF/FFFFFF?text=Ad+Campaign+Design" alt="تصميم حملة إعلانية لمعهد تعليمي">
+                            <div class="info">
+                                <h3>حملة إعلانية لمعهد تعليمي</h3>
+                                <p>تصميم سلسلة إعلانات مؤثرة لزيادة التسجيل في الدورات.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://via.placeholder.com/600x400/FFFF33/333333?text=YouTube+Intro+Video" alt="مقدمة فيديو لقناة يوتيوب">
+                            <div class="info">
+                                <h3>مقدمة فيديو لقناة يوتيوب</h3>
+                                <p>موشن جرافيك احترافي يضيف لمسة مميزة لبداية الفيديوهات.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://via.placeholder.com/600x400/5733FF/FFFFFF?text=Organizational+ID" alt="تصميم هوية بصرية لمؤسسة">
+                            <div class="info">
+                                <h3>هوية بصرية كاملة لمؤسسة خيرية</h3>
+                                <p>تصميم بطاقات تعريفية، ورق رسمي، ومطبوعات للموظفين.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="portfolio-item">
-                        <img src="https://via.placeholder.com/400x300.png?text=Website+UI+Example" alt="تصميم واجهة موقع تجارة إلكترونية">
-                        <div class="info">
-                            <h3>واجهة مستخدم لموقع تجارة إلكترونية</h3>
-                            <p>تصميم تجربة مستخدم سلسة وجذابة لمتجر إلكتروني.</p>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="https://via.placeholder.com/400x300.png?text=Brochure+Design+Example" alt="تصميم كتيب تعريفي لشركة عقارية">
-                        <div class="info">
-                            <h3>كتيب تعريفي لشركة عقارية</h3>
-                            <p>تصميم مطبوعات احترافية تبرز مشاريع الشركة.</p>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="https://via.placeholder.com/400x300.png?text=Mobile+App+UI+Example" alt="تصميم تطبيق جوال لخدمات التوصيل">
-                        <div class="info">
-                            <h3>واجهة تطبيق توصيل</h3>
-                            <p>تصميم جذاب وسهل الاستخدام لتطبيق جوال.</p>
-                        </div>
-                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </section>
@@ -396,15 +590,15 @@
         <section id="about" class="section">
             <div class="container">
                 <h2>من نحن؟ 🤝</h2>
-                <p>نحن DesignKraaft، فريق شغوف من المصممين والمبتكرين. نؤمن بأن التصميم الجيد هو مفتاح النجاح، ونسعى دائمًا لتقديم حلول بصرية مبتكرة ومُخصصة لعملائنا في مختلف المجالات.</p>
-                <p>نحن نركز على فهم رؤيتك وأهدافك، ثم نعمل بجد لتقديم تصاميم لا تبدو رائعة فحسب، بل تحقق النتائج المرجوة وتتجاوز توقعاتك. مهمتنا هي تحويل أفكارك إلى حقيقة بصرية ملموسة.</p>
+                <p>نحن DesignKraaft، فريق شغوف من المصممين والمبتكرين والكتاب والمترجمين. نؤمن بأن التصميم الجيد والمحتوى المؤثر هما مفتاح النجاح لأي مشروع أو هوية. نسعى دائمًا لتقديم حلول بصرية وكتابية مبتكرة ومُخصصة لعملائنا في مختلف المجالات، بدءًا من الأفراد وصولاً إلى كبرى المنظمات.</p>
+                <p>نحن نركز على فهم رؤيتك وأهدافك بعمق، ثم نعمل بجد وشغف لتقديم تصاميم ومحتوى لا يبدو رائعًا فحسب، بل يحقق النتائج المرجوة ويتجاوز توقعاتك. مهمتنا هي تحويل أفكارك إلى حقيقة بصرية ملموسة ومحتوى نصي مؤثر.</p>
             </div>
         </section>
 
         <section id="contact" class="section" style="background-color: #f0f0f0;">
             <div class="container">
                 <h2>تواصل معنا 📞</h2>
-                <p>دعنا نبدأ مشروعك القادم معًا! املأ النموذج أدناه وسنتواصل معك قريبًا.</p>
+                <p>دعنا نبدأ مشروعك القادم معًا! املأ النموذج أدناه وسنتواصل معك قريبًا لنتحدث عن كيفية تحقيق رؤيتك.</p>
                 <form class="contact-form" action="#" method="POST">
                     <div class="form-group">
                         <label for="name">الاسم الكامل:</label>
@@ -432,14 +626,68 @@
         <div class="container">
             <p>&copy; 2025 DesignKraaft. جميع الحقوق محفوظة.</p>
             <div class="social-icons">
-                <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.twitter.com/yourpage" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/yourpage" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/yourcompany" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.behance.net/yourprofile" target="_blank" aria-label="Behance"><i class="fab fa-behance"></i></a>
             </div>
-            <p>تم التصميم بواسطة <a href="https://designkraaft.github.io/" style="color: #007bff; text-decoration: none;">DesignKraaft</a></p>
+            <p>صمم بفخر بواسطة <a href="https://designkraaft.github.io/" style="color: #007bff; text-decoration: none;">DesignKraaft</a></p>
         </div>
     </footer>
 
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // تهيئة Swiper Carousel
+        var swiper = new Swiper('.portfolio-carousel', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 4000, // تغيير الشرائح كل 4 ثوانٍ
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+
+        // لتفعيل القائمة المنسدلة باستخدام JavaScript بسيط
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggle = document.querySelector('.has-dropdown > a');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+
+            if (dropdownToggle && dropdownMenu) {
+                // للتعامل مع النقر بدلاً من التحويم في الأجهزة التي تعمل باللمس
+                dropdownToggle.addEventListener('click', function(e) {
+                    // منع الانتقال للصفحة إذا كان الرابط الرئيسي لا يؤدي لصفحة محددة
+                    if (this.getAttribute('href') === '#services') {
+                        e.preventDefault();
+                    }
+                    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+                });
+
+                // إخفاء القائمة عند النقر خارجها
+                document.addEventListener('click', function(e) {
+                    if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                        dropdownMenu.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
     </body>
 </html>
