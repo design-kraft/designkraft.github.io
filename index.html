@@ -813,33 +813,88 @@
             </div>
         </section>
 
-        <section id="contact" class="section" style="background-color: var(--light-bg);">
-            <div class="container">
-                <h2>تواصل معنا 📞</h2>
-                <p>دعنا نبدأ مشروعك القادم معًا! املأ النموذج أدناه وسنتواصل معك قريبًا لنتحدث عن كيفية تحقيق رؤيتك.</p>
-                <form class="contact-form" action="https://formspree.io/f/xzzgpyyr" method="POST">
-                    <div class="form-group">
-                        <label for="name">الاسم الكامل:</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">البريد الإلكتروني:</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">الموضوع:</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">رسالتك:</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">أرسل الرسالة</button>
-                </form>
-            </div>
-        </section>
-    </main>
+       <section id="contact" class="section" style="background-color: var(--light-bg);">
+    <div class="container">
+        <h2>تواصل معنا 📞</h2>
+        <p>دعنا نبدأ مشروعك القادم معًا! املأ النموذج أدناه وسنتواصل معك قريبًا لنتحدث عن كيفية تحقيق رؤيتك.</p>
+        
+        <div id="contact-success-message" style="display: none; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <p><strong>شكراً لك!</strong></p>
+            <p>تم استلام رسالتك بنجاح وسنتواصل معك قريباً.</p>
+        </div>
 
+        <form id="contact-form" class="contact-form">
+            <div class="form-group">
+                <label for="name">الاسم الكامل:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">الموضوع:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">رسالتك:</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn">أرسل الرسالة</button>
+        </form>
+    </div>
+</section>
+
+<script>
+    const form = document.getElementById('contact-form');
+    const successMessage = document.getElementById('contact-success-message');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault(); // منع الإرسال الافتراضي الذي يؤدي إلى إعادة التوجيه
+
+        submitButton.disabled = true; // تعطيل الزر لمنع الإرسال المتعدد
+        submitButton.textContent = 'جاري الإرسال...'; // تغيير نص الزر
+
+        const formData = new FormData(form);
+        // هذا هو رابط Formspree الخاص بك الذي حصلت عليه
+        const url = 'https://formspree.io/f/xzzgpyyr'; 
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json' // مهم جداً لـ Formspree AJAX
+                }
+            });
+
+            if (response.ok) {
+                form.reset(); // مسح حقول النموذج
+                successMessage.style.display = 'block'; // إظهار رسالة الشكر
+                form.style.display = 'none'; // إخفاء النموذج بعد الإرسال
+                
+                // يمكنك إخفاء رسالة الشكر وإظهار النموذج مرة أخرى بعد 5 ثوانٍ مثلاً
+                // ألغِ التعليق عن السطور التالية إذا أردت هذه الوظيفة
+                // setTimeout(() => {
+                //     successMessage.style.display = 'none';
+                //     form.style.display = 'block';
+                // }, 5000); 
+
+            } else {
+                // إذا كان هناك خطأ في الإرسال
+                const errorData = await response.json();
+                alert('حدث خطأ أثناء إرسال الرسالة: ' + (errorData.errors ? errorData.errors.map(err => err.message).join(', ') : 'خطأ غير معروف.'));
+            }
+        } catch (error) {
+            console.error('خطأ في الشبكة:', error);
+            alert('حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.');
+        } finally {
+            submitButton.disabled = false; // إعادة تفعيل الزر
+            submitButton.textContent = 'أرسل الرسالة'; // إعادة نص الزر الأصلي
+        }
+    });
+</script>
     <footer>
         <div class="container">
             <p>&copy; 2025 DesignKraaft. جميع الحقوق محفوظة.</p>
